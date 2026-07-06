@@ -154,6 +154,7 @@ class CategoryFragment : Fragment() {
 
             cleaAllBg()
             binding.categoryAutomotiveBtn.setBackgroundResource(R.drawable.bg_category)
+            setImages("Automotive")
         }
 
         binding.categoryPetFoodBtn.setOnClickListener {
@@ -164,6 +165,7 @@ class CategoryFragment : Fragment() {
 
             cleaAllBg()
             binding.categoryPetFoodBtn.setBackgroundResource(R.drawable.bg_category)
+            setImages("PetFood")
         }
 
 
@@ -306,6 +308,23 @@ class CategoryFragment : Fragment() {
         dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783337304/Soft_Toys_tzywl9.jpg","Soft Toys", "Toys")
         dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783337302/Reassemble_Toys_jaxh7r.jpg","Reassemble Toys", "Toys")
 
+        //For Automotive Category
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343681/Automotives_Category_a3jymt.jpg","Automotive Category", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343679/Car_s_Accessories_x8b82l.jpg","Car's Accessories", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343679/Bike_Accessories_kqmzlt.jpg","Bike Accessories", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343678/Car_Cleaning_cqdxzq.jpg","Car Cleanings", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343679/Ridding_and_Helmet_fdxl0q.jpg","Riding and Helmet", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783343678/Spare_Part_s_r1qqbw.jpg","Spare Parts", "Automotive")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783334564/Cycling_hz8h4x.jpg","Cycling", "Automotive")
+
+        //For PetFood
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344883/Petfood_Category_e24fxo.jpg","PetFood Category", "PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344879/Dog_Food_j3kvr2.jpg","Dog Food","PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344877/Cats_Food_gzmj0v.jpg","Cat Food","PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344877/Birds_Food_m1w7co.jpg","Birds Food","PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344879/Fish_Food_dif6ot.jpg","Fish Food","PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344880/Pet_Treatments_oczeh9.jpg","Pets Treatment","PetFood")
+        dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1782994289/Make_cove_image_for_app_202607011954_ycru7b.jpg","More Product's","PetFood")
 
     }
 
