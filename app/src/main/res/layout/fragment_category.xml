@@ -29,7 +29,7 @@
             android:id="@+id/btn_search"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="18dp"
             android:src="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,352 +45,384 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 
-
         <ScrollView
-            android:paddingBottom="80dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_top"
             android:id="@+id/rv_sidebar"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="90dp"
-            android:layout_height="0dp"
-            android:background="#FFFFFF"
-            android:clipToPadding="false"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingVertical="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingBottom="80dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_top">
 
+            <LinearLayout
+                android:layout_width="90dp"
+                android:layout_height="0dp"
+                android:background="#FFFFFF"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_top">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
 
-
-                <LinearLayout
-                    android:id="@+id/category_fashion_btn"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_category"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/iv_fashion_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_fashion_category1"
-                        app:tint="#000000" />
-
-                    <TextView
-                        android:id="@+id/tv_fashion_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Fashion"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000"/>
+                    <LinearLayout
+                        android:id="@+id/category_fashion_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_category"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
+                        <ImageView
+                            android:id="@+id/iv_fashion_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_fashion_category1"
+                            app:tint="#000000" />
 
-                <LinearLayout
-                    android:id="@+id/category_electronic_btn"
+                        <TextView
+                            android:id="@+id/tv_fashion_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Fashion"
+                            android:textColor="#111111"
+                            android:textSize="13sp"
+                        />
+                    </LinearLayout>
+                </FrameLayout>
+
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingVertical="8dp">
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
 
-                    <ImageView
-                        android:id="@+id/iv_Electronic_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_electronic_category1"
-                        app:tint="#000000" />
-
-                    <TextView
-                        android:id="@+id/tv_Electronic_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Electronic"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
-
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_home_btn"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
 
-                    <ImageView
-                        android:id="@+id/iv_home_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_home_category1"
-                        app:tint="#000000" />
+                    <LinearLayout
+                        android:id="@+id/category_electronic_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingVertical="8dp">
 
-                    <TextView
-                        android:id="@+id/tv_home_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="4dp"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Home"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
+                        <ImageView
+                            android:id="@+id/iv_Electronic_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_electronic_category1"
+                            app:tint="#000000" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
+                        <TextView
+                            android:id="@+id/tv_Electronic_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Electronic"
+                            android:textColor="#111111"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </FrameLayout>
 
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_beauty_btn"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:paddingStart="8dp">
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
 
-                    <ImageView
-                        android:id="@+id/iv_beauty_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_beauty_category1"
-                        app:tint="#000000" />
+                <FrameLayout
 
-                    <TextView
-                        android:id="@+id/tv_beauty_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Beauty"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
-
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_sport_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
 
-                    <ImageView
-                        android:id="@+id/iv_sport_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_sport_category1"
-                        app:tint="#000000" />
+                    <LinearLayout
+                        android:id="@+id/category_home_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                    <TextView
-                        android:id="@+id/tv_sport_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Sports"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
+                        <ImageView
+                            android:id="@+id/iv_home_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_home_category1"
+                            app:tint="#000000" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
+                        <TextView
+                            android:id="@+id/tv_home_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Home"
+                            android:textColor="#111111"
+                            android:textSize="13sp"
+                           />
+                    </LinearLayout>
+                </FrameLayout>
 
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_books_btn"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
 
-                    <ImageView
-                        android:id="@+id/iv_books_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_books_category1"
-                        app:tint="#000000" />
+                <FrameLayout
 
-                    <TextView
-                        android:id="@+id/tv_books_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Books"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
-
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_toys_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
 
-                    <ImageView
-                        android:id="@+id/iv_toys_icon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_toys_category1"
-                        app:tint="#000000" />
+                    <LinearLayout
+                        android:id="@+id/category_beauty_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:paddingStart="8dp">
 
-                    <TextView
-                        android:id="@+id/tv_toys_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Toys"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
+                        <ImageView
+                            android:id="@+id/iv_beauty_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_beauty_category1"
+                            app:tint="#000000" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
+                        <TextView
+                            android:id="@+id/tv_beauty_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Beauty"
+                            android:textColor="#111111"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+                </FrameLayout>
 
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <LinearLayout
-                    android:id="@+id/category_petFood_btn"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingVertical="8dp">
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
 
-                    <ImageView
-                        android:id="@+id/iv_pet_icon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_pet_food_category1" />
+                <FrameLayout
 
-                    <TextView
-                        android:id="@+id/tv_pet_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:text="Pet Food"
-                        android:textColor="#111111"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </FrameLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0D000000" />
+                    <LinearLayout
+                        android:id="@+id/category_sport_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_sport_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_sport_category1"
+                            app:tint="#000000" />
+
+                        <TextView
+                            android:id="@+id/tv_sport_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Sports"
+                            android:textColor="#111111"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
+
+                <FrameLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/category_books_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_books_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_books_category1"
+                            app:tint="#000000" />
+
+                        <TextView
+                            android:id="@+id/tv_books_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Books"
+                            android:textColor="#111111"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
+
+                <FrameLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/category_toys_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_toys_icon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_toys_category1"
+                            app:tint="#000000" />
+
+                        <TextView
+                            android:id="@+id/tv_toys_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Toys"
+                            android:textColor="#111111"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
+                <FrameLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/category_automotive_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingVertical="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_automotive_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_automotive" />
+
+                        <TextView
+                            android:id="@+id/tv_automotive_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Automotive"
+                            android:textColor="#111111"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
+
+                <FrameLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/category_petFood_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingVertical="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_pet_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_pet_food_category1" />
+
+                        <TextView
+                            android:id="@+id/tv_pet_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="2"
+                            android:text="Pet Food"
+                            android:textColor="#111111"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#08000000" />
 
 
-        </LinearLayout>
+            </LinearLayout>
         </ScrollView>
 
         <View
@@ -398,17 +430,17 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
-            android:background="#EAEAEA"
+            android:background="#EBEAEAEA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/rv_sidebar"
             app:layout_constraintTop_toBottomOf="@id/divider_top" />
 
 
         <androidx.core.widget.NestedScrollView
-            android:paddingBottom="60dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fillViewport="true"
+            android:paddingBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/vertical_divider"
@@ -418,9 +450,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingVertical="10dp"
                 android:paddingTop="1dp"
-                android:paddingBottom="40dp"
-                android:paddingVertical="10dp">
+                android:paddingBottom="40dp">
 
 
                 <androidx.cardview.widget.CardView
@@ -437,21 +469,22 @@
                         android:id="@+id/category_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
                             <ImageView
                                 android:id="@+id/trending_image"
-                                android:scaleType="centerCrop"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <LinearLayout
                             android:id="@+id/ll_banner_text"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:background="#511F1E1E"
                             android:gravity="bottom"
                             android:orientation="vertical"
                             android:padding="10dp"
@@ -460,33 +493,14 @@
                             app:layout_constraintTop_toTopOf="parent">
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Fashion"
-                                android:textColor="#E9E9E9"
-                                android:textSize="22sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="For Every You"
-                                android:textColor="#EBEBEB"
-                                android:textSize="15sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
+                            <Button
+                                android:layout_width="70dp"
+                                android:layout_height="30dp"
                                 android:background="@drawable/orange_button_bg"
-                                android:paddingHorizontal="16dp"
-                                android:paddingVertical="8dp"
                                 android:text="Shop Now"
                                 android:textColor="#FFFFFF"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:textSize="10sp"
+                                 />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -504,16 +518,17 @@
                         android:layout_height="wrap_content"
                         android:text="Shop by Sub Category"
                         android:textColor="#111111"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textColor="@color/primaryGreenColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="View All" />
+                        android:text="View All"
+                        android:textColor="@color/primaryGreenColor"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -531,27 +546,39 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_marginStart="6dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="6dp"
+                            android:layout_marginStart="6dp"
                             android:layout_weight="1"
+                            app:cardUseCompatPadding="true"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
-                                android:backgroundTint="#B3B3B3"
+                                android:backgroundTint="#D1CACA"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/mensClothing"
+
+
+                                    <ImageView
+                                        android:id="@+id/mensClothing"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+
+
+                                <TextView
+                                    android:id="@+id/firstTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -559,25 +586,33 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
+                            app:cardUseCompatPadding="true"
                             android:layout_weight="1"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
-                                android:backgroundTint="#B3B3B3"
+                                android:backgroundTint="#D9D7D7"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/womenClothing"
+                                    <ImageView
+                                        android:id="@+id/womenClothing"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+                                <TextView
+                                    android:id="@+id/secondTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
 
                             </LinearLayout>
@@ -594,53 +629,72 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_marginStart="6dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="6dp"
+                            android:layout_marginStart="6dp"
                             android:layout_weight="1"
+                            app:cardUseCompatPadding="true"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
                                 android:backgroundTint="#B3B3B3"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/kidsClothing"
+
+                                    <ImageView
+                                        android:id="@+id/kidsClothing"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+
+                                <TextView
+                                    android:id="@+id/thirdTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
+                            app:cardUseCompatPadding="true"
                             android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
                                 android:backgroundTint="#B3B3B3"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/footwear"
+
+                                    <ImageView
+                                        android:id="@+id/footwear"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+                                <TextView
+                                    android:id="@+id/fourthTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
 
                             </LinearLayout>
@@ -657,27 +711,37 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_marginStart="6dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="6dp"
+                            android:layout_marginStart="6dp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardUseCompatPadding="true"
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
                                 android:backgroundTint="#B3B3B3"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/watches"
+
+                                    <ImageView
+                                        android:id="@+id/watches"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+
+                                <TextView
+                                    android:id="@+id/fifthTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -685,25 +749,34 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="6dp"
                             android:layout_weight="1"
+                            app:cardUseCompatPadding="true"
                             app:cardBackgroundColor="#F7F9FA"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category"
                                 android:backgroundTint="#B3B3B3"
                                 android:orientation="vertical">
 
-                                <ImageView
-                                    android:id="@+id/jewelry"
+
+                                    <ImageView
+                                        android:id="@+id/jewelry"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="120dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/images_3" />
+
+                                <TextView
+                                    android:id="@+id/sixthTV"
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/images_3" />
+                                    android:layout_height="25dp"
+                                    android:gravity="center"
+                                    android:text="Men's Cloth"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
 
 
                             </LinearLayout>
