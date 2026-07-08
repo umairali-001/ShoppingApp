@@ -77,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab) {
                 TabLayout.INDICATOR_ANIMATION_MODE_ELASTIC
-                binding.viewPager.currentItem = tab.position
+                binding.viewPager2.currentItem = tab.position
                 tabLayoutManager(tab.position)
             }
 
@@ -93,7 +93,7 @@ class HomeActivity : AppCompatActivity() {
 
         })
 
-        binding.viewPager.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback(){
+        binding.viewPager2.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
 
                 binding.tabLayout.getTabAt(position)?.select()
@@ -234,7 +234,7 @@ class HomeActivity : AppCompatActivity() {
 
         var fragmentAdapter = FragmentAdapter(supportFragmentManager, lifecycle, fragmentList)
 
-        binding.viewPager.adapter = fragmentAdapter
+        binding.viewPager2.adapter = fragmentAdapter
 
 
     }

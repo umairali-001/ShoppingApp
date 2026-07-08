@@ -8,17 +8,21 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.sprizen.uashoppingcenter.Activities.ExploreActivity
 import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.Adapters.SliderAdapter
@@ -59,11 +63,144 @@ class HomeFragment : Fragment() {
         binding  = FragmentHomeBinding.inflate(layoutInflater)
 
 
+        initializeEveryThing()
 
 
 
         return binding.root
     }
+
+
+    fun initializeEveryThing(){
+
+        binding.btnSearch.setOnClickListener {
+
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.btnSearch.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.btnSearch.background = null
+
+                    binding.searchLinearLayout.visibility = View.VISIBLE
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.btnSearch.startAnimation(animation)
+        }
+
+
+        binding.backIcon.setOnClickListener {
+
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.backIcon.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.backIcon.background = null
+
+                    binding.searchLinearLayout.visibility = View.GONE
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.backIcon.startAnimation(animation)
+
+        }
+
+
+        binding.cartContainer.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.cartContainer.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.cartContainer.background = null
+
+                    val tabLayout = requireActivity().findViewById<TabLayout>(R.id.tabLayout)
+
+                    tabLayout.selectTab(tabLayout.getTabAt(2))
+
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.cartContainer.startAnimation(animation)
+
+        }
+
+        binding.menuBtn.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.menuBtn.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.menuBtn.background = null
+
+                    val tabLayout = requireActivity().findViewById<TabLayout>(R.id.tabLayout)
+
+                    tabLayout.selectTab(tabLayout.getTabAt(3))
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.menuBtn.startAnimation(animation)
+
+        }
+
+
+
+
+
+
+
+    }
+
 
 
 

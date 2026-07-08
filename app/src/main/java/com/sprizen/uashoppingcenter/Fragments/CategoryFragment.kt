@@ -12,6 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import com.sprizen.uashoppingcenter.DATA_CLASS.ITEM
 import com.sprizen.uashoppingcenter.DATA_CLASS.PHOTO
 import com.sprizen.uashoppingcenter.DataBase
@@ -22,8 +24,6 @@ import com.sprizen.uashoppingcenter.databinding.FragmentCategoryBinding
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
-    private lateinit var listOfItem: MutableList<ITEM>
-
     lateinit var imageViewsList: MutableList<ImageView>
     lateinit var categoryTextViewList : MutableList<TextView>
     lateinit var ImagesUrlList : MutableList<PHOTO>
@@ -38,7 +38,6 @@ class CategoryFragment : Fragment() {
     ): View {
 
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
-
 
 
 
@@ -62,10 +61,66 @@ class CategoryFragment : Fragment() {
             editor.apply()
         }
 
-        
+
 
         registerAllimageViews()
         selectedCategory()
+
+        binding.btnSearch.setOnClickListener {
+
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.btnSearch.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.btnSearch.background = null
+
+                    binding.searchLinearLayout.visibility = View.VISIBLE
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.btnSearch.startAnimation(animation)
+        }
+        binding.backIcon.setOnClickListener {
+
+            val animation = AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.button_animation
+            )
+
+            // کلک ہوتے ہی Background لگ جائے
+            binding.backIcon.setBackgroundResource(R.drawable.button_click_background)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    // Animation ختم ہوتے ہی Background ہٹا دیں
+                    binding.backIcon.background = null
+
+                    binding.searchLinearLayout.visibility = View.GONE
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            binding.backIcon.startAnimation(animation)
+
+        }
 
 
 
@@ -232,9 +287,6 @@ class CategoryFragment : Fragment() {
         else{
             Toast.makeText(requireContext(), "There is no SubCategory", Toast.LENGTH_SHORT).show()
         }
-
-
-
 
 
 
