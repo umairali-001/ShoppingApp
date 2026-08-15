@@ -524,11 +524,10 @@
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="65dp"
         android:background="#FDFDFD"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="10dp"
         android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -537,52 +536,84 @@
 
         <!-- ADD TO CART -->
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
 
-            <Button
+
+            <LinearLayout
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:layout_marginVertical="12dp"
                 android:id="@+id/btnAddToCart"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:background="@color/primaryGreenColor"
-                android:gravity="center"
-                android:text="Add to Cart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:background="@drawable/orange_button_bg"
+                android:gravity="center">
 
-        </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cart_button"
+                    app:tint="@color/white" />
+                    <TextView
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="12.5sp"
+                        android:text="Add to Cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
 
 
         <!-- BUY NOW -->
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            android:layout_marginVertical="12dp"
+            android:id="@+id/btnBuyPruduct"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
             android:layout_weight="2"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            android:backgroundTint="@color/price_orange"
+            android:layout_marginStart="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/orange_button_bg"
+            android:gravity="center">
 
-            <Button
-                android:id="@+id/btnBuyNow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/price_orange"
-                android:gravity="center"
-                android:text="Buy Now"
-                android:textAllCaps="false"
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_order_slid"
+                app:tint="@color/white" />
+            <TextView
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="12.5sp"
+                android:text="Buy Now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
