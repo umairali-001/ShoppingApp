@@ -20,7 +20,6 @@
                 android:id="@+id/imgShoe"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_above="@id/btnDiscover"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image_1"
                 app:layout_constraintStart_toStartOf="parent"

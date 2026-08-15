@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/colorItem"
+    android:layout_width="70dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <!-- Color Circle -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/colorOuterCircle"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        app:cardBackgroundColor="@color/primaryGreenColor"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp">
+
+        <View
+            android:id="@+id/colorCircle"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_profile_body_curve"
+            android:backgroundTint="#000000" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Color Name -->
+
+    <TextView
+        android:id="@+id/tvColorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Black"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</LinearLayout>

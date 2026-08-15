@@ -14,7 +14,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
-import com.sprizen.uashoppingcenter.DATA_CLASS.ITEM
+import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DATA_CLASS.PHOTO
 import com.sprizen.uashoppingcenter.DataBase
 import com.sprizen.uashoppingcenter.R
@@ -32,14 +32,9 @@ class CategoryFragment : Fragment() {
     lateinit var editor : SharedPreferences.Editor
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
 
-        binding = FragmentCategoryBinding.inflate(inflater, container, false)
-
-
+        binding = FragmentCategoryBinding.inflate(layoutInflater)
 
         initializeEveryThing()
 
