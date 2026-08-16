@@ -10,8 +10,8 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -92,7 +92,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // ADAPTER
         // ==========================================
 
-        adapterItem = AdapterItem(requireContext(), itemList)
+        adapterItem = AdapterItem(requireContext(), itemList,this@HomeFragment)
 
 
         // ==========================================
@@ -123,6 +123,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         clickListeners()
 
     }
+
+
 
     fun clickListeners(){
         binding.btnSearch.setOnClickListener {
@@ -430,5 +432,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         super.onDestroyView()
     }
+
 
 }

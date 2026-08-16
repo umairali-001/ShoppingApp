@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
     tools:context=".Activities.LoginActivity">
 
     <ScrollView
@@ -141,7 +143,7 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/primaryGreenColor"
                 android:background="@drawable/loginbutton_bg"
-                android:text="Sign In"
+                android:text="SIGN IN"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"

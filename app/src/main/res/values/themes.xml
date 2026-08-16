@@ -4,10 +4,6 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-
-        <item name="android:windowLightStatusBar">true</item>
-
-
     </style>
     <style name="SpinnerTextColor" parent="Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/black</item>

@@ -3,7 +3,10 @@ package com.sprizen.uashoppingcenter.Activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.sprizen.uashoppingcenter.databinding.ActivitySignUpBinding
 
@@ -16,6 +19,11 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
+
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
+        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
+
 
         initializeEverything()
 

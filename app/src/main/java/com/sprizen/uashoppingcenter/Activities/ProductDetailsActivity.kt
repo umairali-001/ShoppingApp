@@ -6,7 +6,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -31,6 +33,10 @@ class ProductDetailsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityDetailsBuyingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
+        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
+
 
         initializeEveryThing()
 

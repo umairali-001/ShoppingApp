@@ -6,6 +6,7 @@
     android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".Activities.SignUpActivity">
 
         <ScrollView
@@ -181,7 +182,7 @@
                     android:layout_height="54dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/loginbutton_bg"
-                    android:text="Create Account"
+                    android:text="CREATE ACCOUNT"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
