@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@id/divider_top">
 
             <LinearLayout
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="0dp"
                 android:background="#FFFFFF"
                 android:clipToPadding="false"
@@ -75,31 +75,22 @@
 
 
                     <LinearLayout
+                        android:backgroundTint="#07A47E"
                         android:id="@+id/category_fashion_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_category"
+                        android:layout_height="60dp"
+                        android:background="@drawable/item_category"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <ImageView
-                            android:id="@+id/iv_fashion_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_fashion_category1"
-                            app:tint="#000000" />
 
-                        <TextView
-                            android:id="@+id/tv_fashion_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Fashion"
-                            android:textColor="#111111"
-                            android:textSize="13sp"
-                        />
+                            android:id="@+id/iv_fashion_icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_fashion_category1"/>
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -116,29 +107,21 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#3EB571"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_electronic_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingVertical="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_Electronic_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_electronic_category1"
-                            app:tint="#000000" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_electronic_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_Electronic_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Electronic"
-                            android:textColor="#111111"
-                            android:textSize="13sp" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -155,31 +138,21 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="@color/price_orange"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_home_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_home_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_home_category1"
-                            app:tint="#000000" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_home_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_home_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Home"
-                            android:textColor="#111111"
-                            android:textSize="13sp"
-                           />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -196,31 +169,23 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#F59CBB"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_beauty_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp"
-                        android:paddingStart="8dp">
+                        android:padding="5dp"
+                        >
 
                         <ImageView
                             android:id="@+id/iv_beauty_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_beauty_category1"
-                            app:tint="#000000" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_beauty_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_beauty_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Beauty"
-                            android:textColor="#111111"
-                            android:textSize="13sp"
-                            />
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -237,29 +202,22 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#31363F"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_sport_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_sport_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_sport_category1"
-                            app:tint="#000000" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_sport_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_sport_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Sports"
-                            android:textColor="#111111"
-                            android:textSize="13sp" />
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -276,29 +234,21 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#C87E18"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_books_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_books_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/ic_books_category1"
-                            app:tint="#000000" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_books_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_books_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Books"
-                            android:textColor="#111111"
-                            android:textSize="13sp" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -315,30 +265,22 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#D25509"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_toys_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_toys_icon"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:src="@drawable/ic_toys_category1"
-                            app:tint="#000000" />
-
-                        <TextView
-                            android:id="@+id/tv_toys_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Toys"
-                            android:textColor="#111111"
-                            android:textSize="13sp"
                             />
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -354,28 +296,22 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#07439D"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_automotive_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingVertical="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_automotive_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_automotive" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_automotive_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_automotive_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Automotive"
-                            android:textColor="#111111"
-                            android:textSize="13sp" />
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -392,28 +328,22 @@
                     android:paddingVertical="4dp">
 
                     <LinearLayout
+                        android:backgroundTint="#065B57"
+                        android:background="@drawable/item_category"
                         android:id="@+id/category_petFood_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingVertical="8dp">
+                        android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_pet_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:src="@drawable/ic_pet_food_category1" />
 
-                        <TextView
-                            android:id="@+id/tv_pet_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="2"
-                            android:text="Pet Food"
-                            android:textColor="#111111"
-                            android:textSize="13sp" />
+
                     </LinearLayout>
                 </FrameLayout>
 
@@ -551,9 +481,9 @@
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
                             app:cardUseCompatPadding="true"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="2dp">
+                            app:cardBackgroundColor="#F4F4F4"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -573,12 +503,14 @@
 
 
                                 <TextView
+                                    android:textStyle="bold"
+                                    android:textColor="#403F3F"
                                     android:id="@+id/firstTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
+
                                     android:textSize="14dp" />
 
                             </LinearLayout>
@@ -586,12 +518,12 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
+                            app:cardBackgroundColor="#F4F4F4"
                             android:layout_height="wrap_content"
                             app:cardUseCompatPadding="true"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="2dp">
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -607,12 +539,13 @@
                                         android:src="@drawable/images_3" />
 
                                 <TextView
+                                    android:textStyle="bold"
+                                    android:textColor="#403F3F"
                                     android:id="@+id/secondTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
                                     android:textSize="14dp" />
 
 
@@ -634,9 +567,9 @@
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
                             app:cardUseCompatPadding="true"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="2dp">
+                            app:cardBackgroundColor="#F4F4F4"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -659,7 +592,8 @@
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textColor="#403F3F"
                                     android:textSize="14dp" />
 
                             </LinearLayout>
@@ -670,9 +604,9 @@
                             app:cardUseCompatPadding="true"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="2dp">
+                            app:cardBackgroundColor="#F4F4F4"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -689,12 +623,13 @@
                                         android:src="@drawable/images_3" />
 
                                 <TextView
+                                    android:textStyle="bold"
                                     android:id="@+id/fourthTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
+                                    android:textColor="#403F3F"
                                     android:textSize="14dp" />
 
 
@@ -715,10 +650,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
+                            app:cardBackgroundColor="#F4F4F4"
+                            app:cardCornerRadius="10dp"
                             app:cardUseCompatPadding="true"
-                            app:cardElevation="2dp">
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -736,12 +671,13 @@
 
 
                                 <TextView
+                                    android:textStyle="bold"
                                     android:id="@+id/fifthTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
+                                    android:textColor="#403F3F"
                                     android:textSize="14dp" />
 
                             </LinearLayout>
@@ -752,9 +688,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:cardUseCompatPadding="true"
-                            app:cardBackgroundColor="#F7F9FA"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="2dp">
+                            app:cardBackgroundColor="#F4F4F4"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -771,12 +707,13 @@
                                         android:src="@drawable/images_3" />
 
                                 <TextView
+                                    android:textStyle="bold"
                                     android:id="@+id/sixthTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="25dp"
                                     android:gravity="center"
                                     android:text="Men's Cloth"
-                                    android:textColor="@color/black"
+                                    android:textColor="#403F3F"
                                     android:textSize="14dp" />
 
 

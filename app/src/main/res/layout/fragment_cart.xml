@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     xmlns:tools1="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
+    android:background="#FFFFFF"
     android:layout_height="match_parent"
     tools:context=".Fragments.CartFragment">
 
@@ -19,6 +20,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginVertical="4dp"
+
             android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -69,14 +71,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             app:cardBackgroundColor="#E6F6F1"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <LinearLayout
+                android:paddingVertical="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:paddingHorizontal="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,7 +129,7 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@+id/paymentcard"
             app:layout_constraintTop_toBottomOf="@id/cardView">
@@ -136,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:minHeight="250dp"
+                android:paddingHorizontal="10dp"
                 android:nestedScrollingEnabled="false"
                 tools1:listitem="@layout/cart_adapter"/>
 
@@ -159,33 +163,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Price Details"
-                android:textColor="#111111"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+
 
             <LinearLayout
-                android:layout_marginTop="5dp"
+                android:paddingBottom="4dp"
+                android:elevation="0dp"
+                android:backgroundTint="#F7F8FA"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/orange_button_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="16dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Price Details"
+                    android:textColor="#4B4A4A"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout style="@style/PriceDetailRow">
 
                     <TextView
+                        android:id="@+id/total_Price_and_item_cout_text"
                         style="@style/PriceDetailLabel"
-                        android:text="Total Price (3 items)" />
+                        android:text="Total Price (0 items)" />
 
                     <TextView
+                        android:id="@+id/total_price_tv"
                         style="@style/PriceDetailValue"
-                        android:text="₹4,997" />
+                        android:text="Rs: 0.0" />
                 </RelativeLayout>
 
                 <RelativeLayout style="@style/PriceDetailRow">
@@ -195,8 +206,9 @@
                         android:text="Discount" />
 
                     <TextView
+                        android:id="@+id/discount_tv"
                         style="@style/PriceDetailValue"
-                        android:text="- ₹2,998"
+                        android:text="- Rs: 0.0"
                         android:textColor="#00A36C" />
                 </RelativeLayout>
 
@@ -213,15 +225,17 @@
                             android:text="Delivery Charges" />
 
                         <ImageView
-                            android:layout_width="14dp"
+                            android:layout_width="11dp"
                             android:layout_height="14dp"
                             android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_payment_slid"
                             app:tint="#666666" />
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/delivery_charges"
                         style="@style/PriceDetailValue"
-                        android:text="FREE"
+                        android:text="0.0"
                         android:textColor="#00A36C"
                         android:textStyle="bold" />
                 </RelativeLayout>

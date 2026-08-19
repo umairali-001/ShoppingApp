@@ -56,6 +56,8 @@ class CategoryFragment : Fragment() {
             editor.apply()
         }
 
+        cleaAllBg()
+        binding.categoryFashionBtn.setBackgroundResource(R.drawable.bg_category)
 
 
         registerAllimageViews()
@@ -88,6 +90,7 @@ class CategoryFragment : Fragment() {
 
             binding.btnSearch.startAnimation(animation)
         }
+
         binding.backIcon.setOnClickListener {
 
             val animation = AnimationUtils.loadAnimation(
@@ -126,6 +129,7 @@ class CategoryFragment : Fragment() {
 
         setImages("Fashion")
 
+
         binding.categoryFashionBtn.setOnClickListener {
             var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
                 .button_animation)
@@ -136,6 +140,7 @@ class CategoryFragment : Fragment() {
             binding.categoryFashionBtn.setBackgroundResource(R.drawable.bg_category)
             setImages("Fashion")
         }
+
         binding.categoryElectronicBtn.setOnClickListener {
             var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
                 .button_animation)
@@ -232,6 +237,14 @@ class CategoryFragment : Fragment() {
         binding.categoryPetFoodBtn.background = null
         binding.categoryAutomotiveBtn.background = null
     }
+
+
+
+
+
+
+
+
     fun registerAllimageViews(){
 
         categoryTextViewList = ArrayList()

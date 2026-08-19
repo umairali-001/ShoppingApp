@@ -15,8 +15,10 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
         this.context = context
 
         writableDatabase.execSQL("CREATE TABLE IF NOT EXISTS PHOTO(PHOTO_ID INTEGER PRIMARY KEY AUTOINCREMENT, PHOTO_LINK TEXT, PHOTO_NAME TEXT, CATEGORY TEXT )")
-        writableDatabase.execSQL("CREATE TABLE IF NOT EXISTS PRODUCT(PRODUCT_ID INTEGER PRIMARY " +
-                "KEY AUTOINCREMENT, PRODUCT_FB_ID TEXT, IN_STOKE TEXT)")
+        writableDatabase.execSQL(
+            "CREATE TABLE IF NOT EXISTS PRODUCT(PRODUCT_ID INTEGER PRIMARY " +
+                    "KEY AUTOINCREMENT, PRODUCT_FB_ID TEXT, IN_STOKE TEXT)"
+        )
     }
 
     fun insert_information(photoLink: String, photoName: String, category: String): String {
@@ -33,7 +35,7 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
         }
     }
 
-    fun getData(category : String): MutableList<PHOTO> {
+    fun getData(category: String): MutableList<PHOTO> {
         var photoList = mutableListOf<PHOTO>()
 
         val cursor = writableDatabase.rawQuery(
@@ -53,7 +55,8 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
         return photoList
 
     }
-    fun insertCartProduct(productId : String): String{
+
+    fun insertCartProduct(productId: String): String {
 
         var contentValue = contentValuesOf()
 
@@ -68,28 +71,50 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
             return "Succes"
         }
     }
+
     fun getCatProduct(): MutableList<CartSQ> {
         var productList = mutableListOf<CartSQ>()
 
         val cursor = writableDatabase.rawQuery(
-            "SELECT * FROM PRODUCT", null)
+            "SELECT * FROM PRODUCT WHERE IN_STOKE = 'TURE'", null
+        )
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             var autId = cursor.getInt(0)
             var productId = cursor.getString(1)
             var inStoke = cursor.getString(2)
 
 
-            var sigle_Info = CartSQ(autId.toString(),productId.toString() ,inStoke.toString())
+            var sigle_Info = CartSQ(autId.toString(), productId.toString(), inStoke.toString())
             productList.add(sigle_Info)
         }
         return productList
 
     }
 
+    fun getLastAddedProduct(): CartSQ {
+        val cursor = writableDatabase.rawQuery("SELECT * FROM PRODUCT WHERE IN_STOKE = 'TURE'",null)
+        cursor.moveToPosition(cursor.count - 1)
+        var autId = cursor.getInt(0)
+        var productId = cursor.getString(1)
+        var inStoke = cursor.getString(2)
 
+        var lastCartProduct = CartSQ(autId.toString(), productId.toString(), inStoke.toString())
 
+        return lastCartProduct
+
+    }
+
+    fun deleteProduct(id: String): String {
+        var contentValues = contentValuesOf()
+        contentValues.put("IN_STOKE", "FALSE") // or "1", depending on how you want to store it
+
+        val noOfUpdatedRecord = writableDatabase.update(
+            "PRODUCT", contentValues, "PRODUCT_FB_ID=?", arrayOf(id.toString())
+        )
+        return if (noOfUpdatedRecord > 0) "Deleted Success" else "Error"
+    }
 
 
     override fun onCreate(p0: SQLiteDatabase?) {

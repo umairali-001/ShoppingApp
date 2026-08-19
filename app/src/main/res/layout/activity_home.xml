@@ -18,8 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:paddingTop="13dp"
-        android:paddingBottom="5dp"
+
         android:backgroundTint="#FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,30 +30,34 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/homeBT"
-            android:src="@drawable/ic_home_white"
+            android:src="@drawable/ic_home"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="37dp"/>
+            android:layout_height="30dp"/>
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/exploreBT"
-            android:src="@drawable/ic_category_white"
+            android:src="@drawable/ic_category"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="37dp"/>
+            android:layout_height="30dp"/>
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/favBT"
-            android:src="@drawable/ic_cart_white"
+            android:src="@drawable/ic_cart"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="37dp"
+            android:layout_height="30dp"
            />
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/profileBT"
-            android:src="@drawable/ic_profile_white"
+            android:src="@drawable/ic_profile"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="37dp" />
+            android:layout_height="30dp" />
     </LinearLayout>
 
     <View

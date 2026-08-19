@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
@@ -43,22 +45,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var currentSliderPosition = 0
 
     private val sliderRunnable = object : Runnable {
-
         override fun run() {
 
             if (sliderImages.isNotEmpty()) {
-
                 currentSliderPosition++
-
-                binding.viewPager.setCurrentItem(
-                    currentSliderPosition,
-                    true
-                )
-
-                sliderHandler.postDelayed(
-                    this,
-                    3000
-                )
+                binding.viewPager.setCurrentItem(currentSliderPosition, true)
+                sliderHandler.postDelayed(this, 3000)
             }
         }
     }
@@ -72,6 +64,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         initializeEveryThing()
 
+    }
+
+
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        super.onCreate(savedInstanceState)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        initializeEveryThing()
+
+        return binding.root
     }
 
 
@@ -419,6 +428,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             startAutoSlider()
         }
+
+        adapterItem = AdapterItem(requireContext(), itemList,this@HomeFragment)
+
+
+        // ==========================================
+        // RECYCLER VIEW
+        // ==========================================
+
+        var recyclerView = binding.itemShowHomeRecyclerView
+
+
+        recyclerView.adapter = adapterItem
+
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+
+
+        recyclerView.setHasFixedSize(true)
+
+        recyclerView.setItemViewCacheSize(20)
+
     }
 
 

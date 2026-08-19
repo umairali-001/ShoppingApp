@@ -1,5 +1,6 @@
 package com.sprizen.uashoppingcenter.Activities
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
@@ -107,115 +108,38 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-    fun tabLayoutManager(position : Int){
-        when(position){
-            0 ->{
-                imageList[0].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_home
-                    )
-                )
-                imageList[1].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_category_white
-                    )
-                )
-                imageList[2].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_cart_white
-                    )
-                )
-                imageList[3].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_profile_white
-                    )
-                )
+    fun tabLayoutManager(position: Int) {
+
+        val selectedIcons = listOf(
+            R.drawable.ic_home,
+            R.drawable.ic_category,
+            R.drawable.ic_cart,
+            R.drawable.ic_profile
+        )
+
+        val unselectedIcons = listOf(
+            R.drawable.ic_home_white,
+            R.drawable.ic_category_white,
+            R.drawable.ic_cart_white,
+            R.drawable.ic_profile_white
+        )
+
+        for (i in imageList.indices) {
+
+            val drawableRes = if (i == position) {
+                selectedIcons[i]
+            } else {
+                unselectedIcons[i]
             }
-            1-> {
-                imageList[0].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_home_white
-                    )
+
+            imageList[i].setImageDrawable(
+                ContextCompat.getDrawable(
+                    this@HomeActivity,
+                    drawableRes
                 )
-                imageList[1].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_category
-                    )
-                )
-                imageList[2].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_cart_white
-                    )
-                )
-                imageList[3].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_profile_white
-                    )
-                )
-            }
-            2->{
-                imageList[0].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_home_white
-                    )
-                )
-                imageList[1].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_category_white
-                    )
-                )
-                imageList[2].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_carts
-                    )
-                )
-                imageList[3].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_profile_white
-                    )
-                )
-            }
-            3->{
-                imageList[0].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_home_white
-                    )
-                )
-                imageList[1].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_category_white
-                    )
-                )
-                imageList[2].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_cart_white
-                    )
-                )
-                imageList[3].setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@HomeActivity,
-                        R.drawable.ic_profile
-                    )
-                )
-            }
+            )
         }
     }
-
 
 
 

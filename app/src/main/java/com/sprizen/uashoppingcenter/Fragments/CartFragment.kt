@@ -9,16 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
-import com.sprizen.uashoppingcenter.Adapters.AdapterItem
 import com.sprizen.uashoppingcenter.Adapters.ItemCartAdapter
 import com.sprizen.uashoppingcenter.DATA_CLASS.CartSQ
-import com.sprizen.uashoppingcenter.DATA_CLASS.PHOTO
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DataBase
-import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.databinding.FragmentCartBinding
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
 
     private lateinit var binding: FragmentCartBinding
     private lateinit var itemCartAdapter: ItemCartAdapter
@@ -26,6 +23,9 @@ class CartFragment : Fragment() {
 
     private val itemList = mutableListOf<PRODUCT>()
     private val productIds = mutableListOf<String>()
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,31 +35,54 @@ class CartFragment : Fragment() {
 
         binding = FragmentCartBinding.inflate(inflater, container, false)
 
-        dataBase = DataBase(requireContext())
-
-        setupRecyclerView()
-        loadCartProducts()
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeEveryThing()
+    }
+
+
+    fun initializeEveryThing(){
+        dataBase = DataBase(requireContext())
+
+        val cartProductList = dataBase.getCatProduct()
+
+
+        setupRecyclerView()
+
+        loadCartProducts(cartProductList)
+
+
+    }
+
+
 
     private fun setupRecyclerView() {
 
         itemCartAdapter = ItemCartAdapter(
             requireContext(),
-            itemList
-        )
+            itemList, binding,this@CartFragment)
 
         binding.rvCartRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemCartAdapter
         }
+
     }
 
-    private fun loadCartProducts() {
+    private fun loadCartProducts(cartProductList : MutableList<CartSQ>) {
 
         // Get cart products from SQLite
-        val cartProductList = dataBase.getCatProduct()
+
+
 
         if (cartProductList.isEmpty()) {
 
@@ -76,10 +99,15 @@ class CartFragment : Fragment() {
         productIds.clear()
         itemList.clear()
 
+
+
+
         // Get all product IDs
         cartProductList.forEach { cartProduct ->
             productIds.add(cartProduct.productId)
         }
+
+
 
         // Fetch products from Firebase
         loadProductsFromFirebase()
@@ -111,6 +139,7 @@ class CartFragment : Fragment() {
                                 itemList.size - 1
                             )
                         }
+                        itemCartAdapter.notifyDataSetChanged()
                     }
                 }
                 .addOnFailureListener { error ->
@@ -122,5 +151,12 @@ class CartFragment : Fragment() {
                     ).show()
                 }
         }
+    }
+
+    override fun onProductChecked(itemCount: Int, price : Int) {
+
+        binding.totalPriceAndItemCoutText.text = "Total Price (${itemCount}  Items)"
+        binding.totalPriceTv.text = "Rs: ${price}.0"
+
     }
 }

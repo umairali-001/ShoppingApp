@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <!-- 1. Translate Motion (موشن کو نیچے اور دائیں طرف لے جانے کے لیے) -->
+    <translate
+        android:duration="500"
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="30%p"
+        android:toYDelta="70%p" />
+
+    <!-- 2. Scale Motion (تصویر کا سائز چھوٹا کرنے کے لیے) -->
+    <scale
+        android:duration="600"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="0.2"
+        android:toYScale="0.2" />
+
+    <!-- 3. Alpha Motion (ہلکا/Fade کرنے کے لیے) -->
+    <alpha
+        android:duration="600"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.2" />
+
+</set>

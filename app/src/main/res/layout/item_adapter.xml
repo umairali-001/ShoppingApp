@@ -35,6 +35,7 @@
                     android:layout_height="23dp">
 
                     <ImageView
+                        android:id="@+id/cart_btn_image"
                         android:layout_marginStart="2dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_cart_button"
@@ -42,6 +43,7 @@
                         android:layout_height="17dp"
                         app:tint="@color/white" />
                     <TextView
+                        android:id="@+id/cart_btn_text"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"

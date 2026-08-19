@@ -7,24 +7,31 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sprizen.uashoppingcenter.Activities.ProductDetailsActivity
+import com.sprizen.uashoppingcenter.DATA_CLASS.CartSQ
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DataBase
 import com.sprizen.uashoppingcenter.Fragments.HomeFragment
 import com.sprizen.uashoppingcenter.R
+import com.sprizen.uashoppingcenter.databinding.CartAdapterBinding
 
 class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener: HomeFragment) : RecyclerView.Adapter<AdapterItem.ViewHolder>() {
 
     var context : Context
     var itemList : MutableList<PRODUCT>
     lateinit var dataBase: DataBase
+
+    var productCarted = mutableListOf<CartSQ>()
+
 
 
     init {
@@ -73,6 +80,8 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
             .productPriceActual * 100
         binding.itemOffPercentage.text = "${discountps.toInt()}%"
 
+
+
         // Open Product Details
         binding.itemView.setOnClickListener {
 
@@ -106,11 +115,44 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
             }
         }
 
+        //Check product Carted or not
+        productCarted = dataBase.getCatProduct()
+
+        if(productCarted.any{it.productId==itemList[position].productId}){
+            binding.addToCatBtn.isEnabled = false
+
+            binding.addToCatBtn.setBackgroundDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.button_click_background
+                )
+            )
+            binding.cartBtnText.setTextColor(Color.GRAY)
+            binding.cartBtnImage.imageTintList = ColorStateList.valueOf(Color.GRAY)
+            binding.cartBtnText.setText("Cart Added")
+        }
+        else{
+            binding.addToCatBtn.isEnabled = true
+            binding.addToCatBtn.setBackgroundDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.bg_percentage
+                )
+            )
+        }
+
+
+
+
         //Cart Button Logic
         binding.addToCatBtn.setOnClickListener{
 
+            val animation = AnimationUtils.loadAnimation(
+                context,
+                R.anim.cart_animation
+            )
 
-
+            binding.itemView.startAnimation(animation)
 
             var result = dataBase.insertCartProduct(product.productId)
             binding.addToCatBtn.setBackgroundDrawable(
@@ -119,6 +161,11 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
                     R.drawable.button_click_background
                 )
             )
+
+            binding.cartBtnText.setTextColor(Color.GRAY)
+            binding.cartBtnImage.imageTintList = ColorStateList.valueOf(Color.GRAY)
+            binding.cartBtnText.setText("Cart Added")
+            
             Toast.makeText(context,"${product.productId}", Toast.LENGTH_SHORT).show()
             Toast.makeText(context,"$result",Toast.LENGTH_SHORT).show()
 
@@ -128,13 +175,18 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
     }
 
 
+
     override fun getItemCount(): Int {
         return itemList.size
     }
 
 
-    interface OnItemClickListener{
-        fun onItemClick(productId : String)
+    fun PriceDetail(){
+
+
+
+
+
     }
 
 
@@ -156,6 +208,10 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
         val favBg: LinearLayout = itemView.findViewById(R.id.fav_background)
         val addToCatBtn: LinearLayout = itemView.findViewById(R.id.item_addToCart_adapter)
 
+        val cartBtnText: TextView = itemView.findViewById(R.id.cart_btn_text)
+        val cartBtnImage: ImageView = itemView.findViewById(R.id.cart_btn_image)
+
 
     }
+
 }
