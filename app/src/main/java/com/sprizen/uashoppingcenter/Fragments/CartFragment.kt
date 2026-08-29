@@ -1,7 +1,6 @@
 package com.sprizen.uashoppingcenter.Fragments
 
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +24,6 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
     private val productIds = mutableListOf<String>()
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,90 +31,91 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
     ): View {
 
         binding = FragmentCartBinding.inflate(inflater, container, false)
-
-
         return binding.root
     }
+
 
     override fun onResume() {
         super.onResume()
 
+        if (::binding.isInitialized) {
+            loadCartData()
+        }
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeEveryThing()
     }
 
 
-    fun initializeEveryThing(){
+    fun initializeEveryThing() {
+
         dataBase = DataBase(requireContext())
-
-        val cartProductList = dataBase.getCatProduct()
-
 
         setupRecyclerView()
 
-        loadCartProducts(cartProductList)
-
-
+        loadCartData()
     }
-
 
 
     private fun setupRecyclerView() {
 
         itemCartAdapter = ItemCartAdapter(
             requireContext(),
-            itemList, binding,this@CartFragment)
+            itemList,
+            binding,
+            this@CartFragment
+        )
 
         binding.rvCartRecyclerView.apply {
+
             layoutManager = LinearLayoutManager(requireContext())
+
             adapter = itemCartAdapter
         }
-
     }
 
-    private fun loadCartProducts(cartProductList : MutableList<CartSQ>) {
 
-        // Get cart products from SQLite
+    private fun loadCartData() {
 
-
+        val cartProductList = dataBase.getCatProduct()
 
         if (cartProductList.isEmpty()) {
 
-            Toast.makeText(
-                requireContext(),
-                "Cart is empty",
-                Toast.LENGTH_SHORT
-            ).show()
+            itemList.clear()
+            productIds.clear()
+
+            itemCartAdapter.notifyDataSetChanged()
 
             return
         }
 
-        // Clear old data
+
         productIds.clear()
         itemList.clear()
 
 
-
-
-        // Get all product IDs
         cartProductList.forEach { cartProduct ->
+
             productIds.add(cartProduct.productId)
         }
 
 
+        itemCartAdapter.notifyDataSetChanged()
 
-        // Fetch products from Firebase
         loadProductsFromFirebase()
     }
+
 
     private fun loadProductsFromFirebase() {
 
         val productRef = FirebaseDatabase
             .getInstance()
             .getReference("products")
+
 
         productIds.forEach { productId ->
 
@@ -134,12 +132,10 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
 
                             itemList.add(product)
 
-                            // Tell RecyclerView that a new item arrived
                             itemCartAdapter.notifyItemInserted(
                                 itemList.size - 1
                             )
                         }
-                        itemCartAdapter.notifyDataSetChanged()
                     }
                 }
                 .addOnFailureListener { error ->
@@ -153,10 +149,16 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
         }
     }
 
-    override fun onProductChecked(itemCount: Int, price : Int) {
 
-        binding.totalPriceAndItemCoutText.text = "Total Price (${itemCount}  Items)"
-        binding.totalPriceTv.text = "Rs: ${price}.0"
+    override fun onProductChecked(
+        itemCount: Int,
+        price: Int
+    ) {
 
+        binding.totalPriceAndItemCoutText.text =
+            "Total Price (${itemCount}  Items)"
+
+        binding.totalPriceTv.text =
+            "Rs: ${price}.0"
     }
 }

@@ -539,37 +539,31 @@
 
 
             <LinearLayout
-                android:elevation="2dp"
                 android:orientation="horizontal"
                 android:layout_marginVertical="12dp"
                 android:id="@+id/btnAddToCart"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:paddingHorizontal="4dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/orange_button_bg"
+                android:background="@drawable/bg_outline_button"
                 android:gravity="center">
 
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="20dp"
                     android:layout_height="18dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_cart_button"
-                    app:tint="@color/white" />
+                    android:src="@drawable/ic_carts"/>
                     <TextView
-                        android:textColor="@color/white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/primaryGreenColor"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="12.5sp"
                         android:text="Add to Cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-
-
-
-
-
-
 
             </LinearLayout>
 
@@ -579,13 +573,11 @@
         <!-- BUY NOW -->
 
         <LinearLayout
-            android:elevation="2dp"
             android:orientation="horizontal"
             android:layout_marginVertical="12dp"
             android:id="@+id/btnBuyPruduct"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:backgroundTint="@color/price_orange"
             android:layout_marginStart="10dp"
             android:layout_height="match_parent"
             android:background="@drawable/orange_button_bg"
@@ -604,15 +596,9 @@
                 android:layout_gravity="center"
                 android:textSize="12.5sp"
                 android:text="Buy Now"
+                android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
-
-
-
-
-
-
         </LinearLayout>
 
     </LinearLayout>

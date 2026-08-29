@@ -34,10 +34,13 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
 
 
 
+
+
     init {
         this.context = context
         this.itemList = itemList
         dataBase = DataBase(context)
+
 
     }
 
@@ -67,7 +70,7 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
         binding.itemPrice.text = "${product.productPriceSelling}"
 
         // Listing Price
-        binding.listingPrice.text = "₹${product.productPriceActual}"
+        binding.listingPrice.text = "Rs:${product.productPriceActual}"
 
         // Rating
         binding.itemRatting.text = "★ ${product.rating}"
@@ -144,15 +147,12 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
 
 
 
+
         //Cart Button Logic
         binding.addToCatBtn.setOnClickListener{
 
-            val animation = AnimationUtils.loadAnimation(
-                context,
-                R.anim.cart_animation
-            )
+            listener.onButtonClick(binding.imageUrl)
 
-            binding.itemView.startAnimation(animation)
 
             var result = dataBase.insertCartProduct(product.productId)
             binding.addToCatBtn.setBackgroundDrawable(
@@ -165,14 +165,19 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
             binding.cartBtnText.setTextColor(Color.GRAY)
             binding.cartBtnImage.imageTintList = ColorStateList.valueOf(Color.GRAY)
             binding.cartBtnText.setText("Cart Added")
-            
-            Toast.makeText(context,"${product.productId}", Toast.LENGTH_SHORT).show()
-            Toast.makeText(context,"$result",Toast.LENGTH_SHORT).show()
-
             binding.addToCatBtn.isEnabled = false
+
+
 
         }
     }
+
+
+    interface OnButtonClickListener {
+        fun onButtonClick(imageView: ImageView)
+
+    }
+
 
 
 

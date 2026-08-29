@@ -24,7 +24,8 @@ import com.sprizen.uashoppingcenter.databinding.FragmentCartBinding
 class ItemCartAdapter(
     context: Context, itemList: MutableList<PRODUCT>,
     bindingCartF:
-    FragmentCartBinding, var listener: CartFragment
+    FragmentCartBinding,
+    var listener: CartFragment,
 ) :
     RecyclerView.Adapter<ItemCartAdapter.ViewHolder>() {
 
@@ -32,12 +33,17 @@ class ItemCartAdapter(
     var context: Context
     var itemList: MutableList<PRODUCT>
 
-    var bindingCartF : FragmentCartBinding
+    var isItemChecked = false
+    var bindingCartF: FragmentCartBinding
 
     var totalPrice = 0
-    var dataBase : DataBase
+    var dataBase: DataBase
+
+    var itemQuantity = 1
 
     var selectedList = mutableListOf<PRODUCT>()
+
+    var itemCoutList = MutableList(itemList.size) { 1 }
 
     init {
         this.context = context
@@ -48,41 +54,26 @@ class ItemCartAdapter(
     }
 
 
-
-
-
-
     override fun onCreateViewHolder(p0: ViewGroup, position: Int): ItemCartAdapter.ViewHolder {
 
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.cart_adapter, null))
     }
 
+
     override fun onBindViewHolder(binding: ItemCartAdapter.ViewHolder, position: Int) {
 
-        var position = binding.absoluteAdapterPosition
-
         try {
+
+            itemCoutList.add(1)
+
+
+            var position = binding.bindingAdapterPosition
 
 
             binding.productName.text = itemList[position].productName
             binding.productPrice.text = "Rs:${itemList[position].productPriceSelling}"
             binding.productOldPrice.text = "Rs:${itemList[position].productPriceActual}"
             binding.productDesc.text = "${itemList[position].discountOfProduct} OFF"
-            binding.productCategory.text = itemList[position].category.toString()
-            var stokeValue = itemList[position].stockAvailable
-            if (stokeValue > itemList[position].lowStockAlert) {
-                binding.productStoke.text = "In Stoke"
-            } else if (stokeValue <= itemList[position].lowStockAlert) {
-                binding.productStoke.text = "Only ${itemList[position].stockAvailable} Items"
-                binding.productStoke.setTextColor(Color.red(1))
-
-            }
-
-            binding.deleteBtn.setOnClickListener {
-                deleteDilog(position)
-            }
-
-
 
 
 
@@ -94,46 +85,78 @@ class ItemCartAdapter(
                 .into(binding.productImage)
 
 
-
-
             var product = itemList[position]
             var price = itemList[position].productPriceSelling.toInt()
 
             binding.chackBox.setOnCheckedChangeListener(null)
-            binding.chackBox.setOnCheckedChangeListener { _,isChacked ->
+            binding.chackBox.setOnCheckedChangeListener { _, isChacked ->
 
 
-                if (isChacked){
+                if (isChacked) {
                     selectedList.add(product)
-                    totalPrice += price
-                }
-                else{
+                    totalPrice += price * itemCoutList[position]
+                    isItemChecked=true
 
+                }else{
 
-
-                    totalPrice-=price
+                    totalPrice -= price * itemCoutList[position]
                     selectedList.remove(product)
 
                 }
-                listener.onProductChecked(selectedList.size, totalPrice)
 
+                    binding.quantity.text = "${itemCoutList[position]}"
+                    listener.onProductChecked(selectedList.size, totalPrice)
 
             }
 
 
+            binding.btn_minus.setOnClickListener {
 
+                if (itemCoutList[position] > 1) {
 
+                    if (binding.chackBox.isChecked) {
+                        totalPrice -= price
+                    }
 
-        }
-        catch (e: Exception){
+                    itemCoutList[position] = itemCoutList[position] - 1
+                }
+
+                binding.quantity.text = "${itemCoutList[position]}"
+                listener.onProductChecked(selectedList.size, totalPrice)
+            }
+
+            binding.btn_pluse.setOnClickListener {
+
+                if (itemCoutList[position] < itemList[position].stockAvailable) {
+
+                    if (binding.chackBox.isChecked) {
+                        totalPrice += price
+                    }
+
+                    itemCoutList[position] = itemCoutList[position] + 1
+                }
+
+                binding.quantity.text = "${itemCoutList[position]}"
+                listener.onProductChecked(selectedList.size, totalPrice)
+            }
+
+            binding.deleteBtn.setOnClickListener {
+                if (binding.chackBox.isChecked){
+                    binding.chackBox.isChecked = false
+                }
+                deleteDilog(position)
+            }
+        } catch (e: Exception) {
 
             e.stackTrace
 
         }
 
     }
-    interface OnProductCheckedListener{
-        fun onProductChecked(itemCount : Int, price : Int)
+
+    interface OnProductCheckedListener {
+        fun onProductChecked(itemCount: Int, price: Int)
+
     }
 
     override fun getItemCount(): Int {
@@ -148,29 +171,26 @@ class ItemCartAdapter(
         var productOldPrice = itemView.findViewById<TextView>(R.id.tv_old_price)
         var productDesc = itemView.findViewById<TextView>(R.id.tv_discount_tag)
 
-        var productCategory = itemView.findViewById<TextView>(R.id.tv_product_category)
-        var productStoke = itemView.findViewById<TextView>(R.id.tv_product_stoke)
 
         var deleteBtn = itemView.findViewById<ImageView>(R.id.btn_delete)
 
 
         var chackBox = itemView.findViewById<CheckBox>(R.id.cb_select_product)
 
+        var btn_minus = itemView.findViewById<ImageView>(R.id.btn_minus)
+
+        var btn_pluse = itemView.findViewById<ImageView>(R.id.btn_plus)
+
+        var quantity = itemView.findViewById<TextView>(R.id.tv_qty_count)
 
 
     }
 
 
-
-
-
-
-
-
     @SuppressLint("MissingInflatedId")
-    fun deleteDilog(position: Int){
+    fun deleteDilog(position: Int) {
         var builder = AlertDialog.Builder(context)
-        var layout = LayoutInflater.from(context).inflate(R.layout.dialog_delete_product,null)
+        var layout = LayoutInflater.from(context).inflate(R.layout.dialog_delete_product, null)
         builder.setView(layout)
         var dailog = builder.create()
         dailog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -183,11 +203,22 @@ class ItemCartAdapter(
         }
 
         deleteBtn.setOnClickListener {
-            var result = dataBase.deleteProduct(itemList[position].productId)
-            this.notifyItemChanged(position)
-            itemList.removeAt(position)
-            dailog.dismiss()
-            Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+            try {
+                dataBase.deleteProduct(itemList[position].productId)
+                itemList.removeAt(position)
+                itemCoutList.removeAt(position)
+
+
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, itemList.size)
+                dailog.dismiss()
+
+            }
+            catch (e: Exception){
+                Toast.makeText(context, "${e}", Toast.LENGTH_SHORT).show()
+                e.stackTrace
+            }
+
         }
     }
 }

@@ -2,12 +2,16 @@ package com.sprizen.uashoppingcenter.Activities
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -33,21 +37,48 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
 
-
-
         initializeEveryThing()
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.tabLayout1) { _, insets ->
+
+            val navigationInsets =
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+
+            val params =
+                binding.tabLayout1.layoutParams as ViewGroup.MarginLayoutParams
+
+            params.bottomMargin = navigationInsets.bottom
+
+            binding.tabLayout1.layoutParams = params
+
+            insets
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.tabLayout) { _, insets ->
+
+            val navigationInsets =
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+
+            val params =
+                binding.tabLayout.layoutParams as ViewGroup.MarginLayoutParams
+
+            params.bottomMargin = navigationInsets.bottom
+
+            binding.tabLayout.layoutParams = params
+
+            insets
+        }
     }
 
     //===================================================================================================================
 
     fun initializeEveryThing(){
-        window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
-        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
+//        window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
+//        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
 
 
 
 
+        binding.viewPager2.isUserInputEnabled = false
 
 
 
@@ -110,34 +141,32 @@ class HomeActivity : AppCompatActivity() {
 
     fun tabLayoutManager(position: Int) {
 
-        val selectedIcons = listOf(
+        val iconsList = listOf(
             R.drawable.ic_home,
             R.drawable.ic_category,
             R.drawable.ic_cart,
             R.drawable.ic_profile
         )
 
-        val unselectedIcons = listOf(
-            R.drawable.ic_home_white,
-            R.drawable.ic_category_white,
-            R.drawable.ic_cart_white,
-            R.drawable.ic_profile_white
+        val selectedColor = ContextCompat.getColor(
+            this@HomeActivity,
+            R.color.primaryGreenColor
         )
 
         for (i in imageList.indices) {
 
-            val drawableRes = if (i == position) {
-                selectedIcons[i]
-            } else {
-                unselectedIcons[i]
-            }
+            imageList[i].setImageResource(iconsList[i])
 
-            imageList[i].setImageDrawable(
-                ContextCompat.getDrawable(
-                    this@HomeActivity,
-                    drawableRes
-                )
-            )
+            if (i == position) {
+
+                // Selected icon → tint
+                imageList[i].setColorFilter(selectedColor)
+
+            } else {
+
+                // Unselected icon → tint remove
+                imageList[i].colorFilter = null
+            }
         }
     }
 

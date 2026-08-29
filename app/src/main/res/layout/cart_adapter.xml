@@ -20,27 +20,27 @@
         android:src="@drawable/ic_trash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#CDF03333" />
+        app:tint="#636364" />
 
     <CheckBox
-        android:layout_margin="11dp"
+        android:layout_margin="4.6dp"
         android:elevation="3dp"
         android:id="@+id/cb_select_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="#00A36C"
         android:checked="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="#F7F8FA"
+        android:background="@drawable/bg_counter_box"
         app:cardUseCompatPadding="true"
-        app:cardElevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,10 +49,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="2dp">
+                <View
+                    android:layout_width="400dp"
+                    android:layout_height="1dp"/>
+
 
                 <!-- Checkbox Toggle -->
                 <!-- Product Image Showcase -->
@@ -61,8 +66,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/iv_cart_product"
                     android:layout_width="wrap_content"
+                    android:background="@drawable/bg_counter_box"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
+                    android:layout_marginStart="30dp"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -71,8 +77,8 @@
 
                     <ImageView
                         android:id="@+id/iv_cart_product_image"
-                        android:layout_width="86dp"
-                        android:layout_height="86dp"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/images_8" />
 
@@ -80,6 +86,7 @@
 
                 <!-- Info Description Block -->
                 <LinearLayout
+                    android:layout_marginTop="8dp"
                     android:id="@+id/ll_info_block"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -106,43 +113,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Black"
-                            android:textColor="#666666"
+                            android:textColor="@color/black"
                             android:textSize="13sp" />
 
-                        <View
-                            android:layout_marginVertical="3dp"
-                            android:layout_marginHorizontal="6dp"
-                            android:background="@color/text_off_white"
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"/>
-
-                        <TextView
-                            android:id="@+id/tv_product_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Electronic"
-                            android:textColor="@color/price_orange"
-                            android:textSize="13sp" />
-
-                        <View
-                            android:layout_marginVertical="3dp"
-                            android:layout_marginHorizontal="6dp"
-                            android:background="@color/text_off_white"
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"/>
-
-                        <TextView
-                            android:gravity="center_vertical"
-                            android:paddingHorizontal="4dp"
-                            android:backgroundTint="#7F1D8A66"
-                            android:background="@drawable/bg_counter_box"
-                            android:id="@+id/tv_product_stoke"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="In Stoke"
-                            android:textStyle="bold"
-                            android:textColor="@color/primaryGreenColor"
-                            android:textSize="12sp" />
 
 
 
@@ -161,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹1,499"
-                            android:textColor="@color/primaryGreenColor"
+                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -181,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:text="50% OFF"
-                            android:textColor="#00A36C"
+                            android:textColor="@color/primaryGreenColor"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -192,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_counter_box"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -200,14 +173,21 @@
                     app:layout_constraintStart_toStartOf="@id/ll_info_block"
                     app:layout_constraintTop_toBottomOf="@id/ll_info_block">
 
+
                     <ImageView
+                        android:padding="5dp"
                         android:layout_margin="0.1dp"
                         android:id="@+id/btn_minus"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/ic_minus"
-                        app:tint="#B33D3D" />
+                        app:tint="#161616" />
+
+                    <View
+                        android:background="#ABABAB"
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"/>
 
                     <TextView
                         android:layout_marginHorizontal="10dp"
@@ -220,14 +200,19 @@
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
+                    <View
+                        android:background="#ABABAB"
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"/>
                     <ImageView
+                        android:padding="5dp"
                         android:layout_margin="0.1dp"
                         android:id="@+id/btn_plus"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/ic_plus"
-                        app:tint="@color/primaryGreenColor" />
+                        app:tint="#2C2B2B" />
                 </LinearLayout>
 
                 <!-- Trash Delete Trigger Button -->

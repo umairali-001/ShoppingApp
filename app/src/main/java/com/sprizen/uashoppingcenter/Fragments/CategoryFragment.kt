@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
@@ -21,7 +22,7 @@ import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.databinding.FragmentCategoryBinding
 
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(),View.OnClickListener  {
 
     private lateinit var binding: FragmentCategoryBinding
     lateinit var imageViewsList: MutableList<ImageView>
@@ -56,12 +57,50 @@ class CategoryFragment : Fragment() {
             editor.apply()
         }
 
+        registerAllimageViews()
+
+        val categoryButtons = mapOf(
+            binding.categoryFashionBtn to "Fashion",
+            binding.categoryElectronicBtn to "Electronic",
+            binding.categoryHomeBtn to "Home",
+            binding.categoryBeautyBtn to "Beauty",
+            binding.categorySportBtn to "Sport",
+            binding.categoryBooksBtn to "Books",
+            binding.categoryToysBtn to "Toys",
+            binding.categoryAutomotiveBtn to "Automotive",
+            binding.categoryPetFoodBtn to "PetFood"
+        )
+
+        categoryButtons.forEach { (button, category) ->
+            button.setOnClickListener {
+
+                cleaAllBg()
+                // Yahan pata chal jayega kaunsi category click hui
+
+                    var animation = AnimationUtils.loadAnimation(
+                        requireContext(), R.anim
+                            .button_animation
+                    )
+                    button.animation = animation
+                    animation.start()
+
+                    button.setBackgroundResource(R.drawable.bg_category)
+
+
+                    println("Selected Category: $category")
+
+                    // Ab category ke mutabiq jo kaam karna hai wo karo
+                setImages(category)
+            }
+        }
+
+        setImages("Fashion")
         cleaAllBg()
         binding.categoryFashionBtn.setBackgroundResource(R.drawable.bg_category)
 
 
-        registerAllimageViews()
-        selectedCategory()
+
+
 
         binding.btnSearch.setOnClickListener {
 
@@ -124,109 +163,7 @@ class CategoryFragment : Fragment() {
 
     }
 
-
-    fun selectedCategory(){
-
-        setImages("Fashion")
-
-
-        binding.categoryFashionBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryFashionBtn.animation = animation
-            animation.start()
-
-            cleaAllBg()
-            binding.categoryFashionBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Fashion")
-        }
-
-        binding.categoryElectronicBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryElectronicBtn.animation = animation
-            animation.start()
-            cleaAllBg()
-
-            binding.categoryElectronicBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Electronic")
-        }
-        binding.categoryHomeBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryHomeBtn.animation = animation
-            animation.start()
-            cleaAllBg()
-
-            binding.categoryHomeBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Home")
-        }
-        binding.categoryBeautyBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryBeautyBtn.animation = animation
-            animation.start()
-            cleaAllBg()
-
-            binding.categoryBeautyBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Beauty")
-        }
-        binding.categorySportBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categorySportBtn.animation = animation
-            animation.start()
-            cleaAllBg()
-
-            binding.categorySportBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Sport")
-        }
-        binding.categoryBooksBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryBooksBtn.animation = animation
-            animation.start()
-
-            cleaAllBg()
-            binding.categoryBooksBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Books")
-        }
-        binding.categoryToysBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryToysBtn.animation = animation
-            animation.start()
-
-            cleaAllBg()
-            binding.categoryToysBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Toys")
-        }
-        binding.categoryAutomotiveBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryAutomotiveBtn.animation = animation
-            animation.start()
-
-            cleaAllBg()
-            binding.categoryAutomotiveBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("Automotive")
-        }
-
-        binding.categoryPetFoodBtn.setOnClickListener {
-            var animation = AnimationUtils.loadAnimation(requireContext(),R.anim
-                .button_animation)
-            binding.categoryPetFoodBtn.animation = animation
-            animation.start()
-
-            cleaAllBg()
-            binding.categoryPetFoodBtn.setBackgroundResource(R.drawable.bg_category)
-            setImages("PetFood")
-        }
-
-
-    }
     fun cleaAllBg(){
-
         binding.categoryFashionBtn.background = null
         binding.categoryHomeBtn.background = null
         binding.categoryBeautyBtn.background = null
@@ -237,13 +174,6 @@ class CategoryFragment : Fragment() {
         binding.categoryPetFoodBtn.background = null
         binding.categoryAutomotiveBtn.background = null
     }
-
-
-
-
-
-
-
 
     fun registerAllimageViews(){
 
@@ -385,6 +315,12 @@ class CategoryFragment : Fragment() {
         dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344879/Fish_Food_dif6ot.jpg","Fish Food","PetFood")
         dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1783344880/Pet_Treatments_oczeh9.jpg","Pets Treatment","PetFood")
         dataBase.insert_information("https://res.cloudinary.com/q3pn4aap/image/upload/v1782994289/Make_cove_image_for_app_202607011954_ycru7b.jpg","More Product's","PetFood")
+
+    }
+
+    override fun onClick(p0: View?) {
+
+
 
     }
 

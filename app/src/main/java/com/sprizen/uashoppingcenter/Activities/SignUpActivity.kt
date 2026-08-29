@@ -21,9 +21,6 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
 
-        window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
-        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
-
 
         initializeEverything()
 
