@@ -11,8 +11,8 @@
     <ImageView
 
         android:layout_marginBottom="15dp"
-        android:elevation="3dp"
-        android:layout_marginEnd="12dp"
+        android:elevation="4dp"
+        android:layout_marginEnd="15dp"
         android:id="@+id/btn_delete"
         android:layout_width="23dp"
         android:layout_height="23dp"
@@ -23,7 +23,7 @@
         app:tint="#636364" />
 
     <CheckBox
-        android:layout_margin="4.6dp"
+        android:layout_margin="6dp"
         android:elevation="3dp"
         android:id="@+id/cb_select_product"
         android:layout_width="wrap_content"
@@ -36,21 +36,27 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:cardCornerRadius="10dp"
-        android:background="@drawable/bg_counter_box"
+        android:background="@drawable/bg_card"
         app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:background="@drawable/bg_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
+
+
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:backgroundTint="@color/white"
+                android:background="@drawable/bg_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="2dp">
@@ -66,10 +72,10 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/iv_cart_product"
                     android:layout_width="wrap_content"
-                    android:background="@drawable/bg_counter_box"
+                    android:backgroundTint="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    app:cardCornerRadius="8dp"
+                    app:cardCornerRadius="17dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,5 +227,5 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -99,4 +99,11 @@
         android:layout_height="60dp"/>
 
 
+    <View
+        android:elevation="20dp"
+        android:background="@drawable/screen_bg"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
 </FrameLayout>

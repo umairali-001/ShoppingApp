@@ -1,10 +1,14 @@
 package com.sprizen.uashoppingcenter.Fragments
 
+import android.gesture.Gesture
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
@@ -12,6 +16,7 @@ import com.sprizen.uashoppingcenter.Adapters.ItemCartAdapter
 import com.sprizen.uashoppingcenter.DATA_CLASS.CartSQ
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DataBase
+import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.databinding.FragmentCartBinding
 
 class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
@@ -47,6 +52,7 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         initializeEveryThing()
     }
 
@@ -58,6 +64,7 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
         setupRecyclerView()
 
         loadCartData()
+
     }
 
 

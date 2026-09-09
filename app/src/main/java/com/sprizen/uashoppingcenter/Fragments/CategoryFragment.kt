@@ -1,5 +1,6 @@
 package com.sprizen.uashoppingcenter.Fragments
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
+import com.sprizen.uashoppingcenter.Activities.ExploreActivity
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DATA_CLASS.PHOTO
 import com.sprizen.uashoppingcenter.DataBase
@@ -101,61 +103,12 @@ class CategoryFragment : Fragment(),View.OnClickListener  {
 
 
 
-
         binding.btnSearch.setOnClickListener {
 
-            val animation = AnimationUtils.loadAnimation(
-                requireContext(),
-                R.anim.button_animation
-            )
 
-            // کلک ہوتے ہی Background لگ جائے
             binding.btnSearch.setBackgroundResource(R.drawable.button_click_background)
-
-            animation.setAnimationListener(object : Animation.AnimationListener {
-
-                override fun onAnimationStart(animation: Animation?) {}
-
-                override fun onAnimationEnd(animation: Animation?) {
-
-                    // Animation ختم ہوتے ہی Background ہٹا دیں
-                    binding.btnSearch.background = null
-
-                    binding.searchLinearLayout.visibility = View.VISIBLE
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {}
-            })
-
-            binding.btnSearch.startAnimation(animation)
-        }
-
-        binding.backIcon.setOnClickListener {
-
-            val animation = AnimationUtils.loadAnimation(
-                requireContext(),
-                R.anim.button_animation
-            )
-
-            // کلک ہوتے ہی Background لگ جائے
-            binding.backIcon.setBackgroundResource(R.drawable.button_click_background)
-
-            animation.setAnimationListener(object : Animation.AnimationListener {
-
-                override fun onAnimationStart(animation: Animation?) {}
-
-                override fun onAnimationEnd(animation: Animation?) {
-
-                    // Animation ختم ہوتے ہی Background ہٹا دیں
-                    binding.backIcon.background = null
-
-                    binding.searchLinearLayout.visibility = View.GONE
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {}
-            })
-
-            binding.backIcon.startAnimation(animation)
+            binding.btnSearch.postDelayed({ binding.btnSearch.background=null },50)
+            startActivity(Intent(requireContext(), ExploreActivity::class.java))
 
         }
 

@@ -19,7 +19,20 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
             "CREATE TABLE IF NOT EXISTS PRODUCT(PRODUCT_ID INTEGER PRIMARY " +
                     "KEY AUTOINCREMENT, PRODUCT_FB_ID TEXT, IN_STOKE TEXT)"
         )
+        writableDatabase.execSQL(
+            "CREATE TABLE IF NOT EXISTS SEARCHES(SEARCH_ID INTEGER PRIMARY " +
+                    "KEY AUTOINCREMENT, SEARCH TEXT, IS_DELETED TEXT)"
+        )
     }
+
+
+
+
+
+
+    //=====================================================================================
+    //              FOR IMAGE LOADING FOR CATEGORY SECTION
+    //======================================================================================
 
     fun insert_information(photoLink: String, photoName: String, category: String): String {
         var contentValue = contentValuesOf()
@@ -56,6 +69,9 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
 
     }
 
+    //=====================================================================================
+    //              FOR CARTED PRODUCTS IN CART SECTION SECTION
+    //======================================================================================
     fun insertCartProduct(productId: String): String {
 
         var contentValue = contentValuesOf()
@@ -115,6 +131,52 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 
         )
         return if (noOfUpdatedRecord > 0) "Deleted Success" else "Error"
     }
+
+
+
+
+
+
+
+
+
+
+    //=====================================================================================
+    //              FOR RESENT SEARCHES FOR SEARCH SECTION
+    //======================================================================================
+
+    fun insertResentSearch(search: String): String {
+
+        var contentValue = contentValuesOf()
+
+        contentValue.put("SEARCH", search)
+        contentValue.put("IS_DELETED", "FALSE")
+
+        var result = writableDatabase.insert("SEARCHES", null, contentValue)
+
+        if (result == -1L) {
+            return "Error"
+        } else {
+            return "Succes"
+        }
+    }
+    fun getRecentSearches(): MutableList<String> {
+        var photoList = mutableListOf<String>()
+
+        var cursor = writableDatabase.rawQuery("SELECT * FROM SEARCHES",
+            null)
+
+        while (cursor.moveToNext()) {
+            var search = cursor.getString(1)
+
+            photoList.add(search)
+
+        }
+        return photoList
+    }
+
+
+
 
 
     override fun onCreate(p0: SQLiteDatabase?) {

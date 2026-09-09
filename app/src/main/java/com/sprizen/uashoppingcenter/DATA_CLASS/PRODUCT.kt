@@ -37,5 +37,7 @@ data class PRODUCT(
 
     val location: String = "",
 
-    val rating: Double = 0.0
+    val rating: Double = 0.0,
+
+    var userId : String =""
 )

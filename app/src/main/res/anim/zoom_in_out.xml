@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fillAfter="true"
-    android:shareInterpolator="false">
+<set xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Smooth Slide Down Effect
-        fromYDelta: Starts from 50% above its position to make it shorter and smoother
-        toYDelta: Settles at its original position
-        duration: 1500ms (1.5 seconds) for a premium, non-rushed feel
-        interpolator: cubic_bezier / accelerate_decelerate for premium smoothness
-    -->
-    <translate
-        android:fromYDelta="-50%p"
-        android:toYDelta="0%p"
-        android:duration="1500"
+    <!-- Soft Press -->
+    <scale
+        android:fromXScale="1.0"
+        android:toXScale="0.96"
+        android:fromYScale="1.0"
+        android:toYScale="0.96"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="70"
+        android:interpolator="@android:anim/accelerate_interpolator" />
+
+    <!-- Smooth Release -->
+    <scale
+        android:fromXScale="0.96"
+        android:toXScale="1.0"
+        android:fromYScale="0.96"
+        android:toYScale="1.0"
+        android:startOffset="100"
+        android:duration="70"
+        android:pivotX="50%"
+        android:pivotY="50%"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
 
-    <!--
-        Smooth Fade-in Visibility System
-        fromAlpha: Starts at 0.0 (completely invisible)
-        toAlpha: Gradually reaches 1.0 (fully visible)
-        duration: 1200ms of the total 1500ms for a natural blend
-    -->
-    <alpha
-        android:fromAlpha="0.0"
-        android:toAlpha="1.0"
-        android:duration="1200"
-        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
 </set>

@@ -500,7 +500,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
             .translationY((targetY - startY).toFloat())
             .scaleX(0.1f)
             .scaleY(0.1f)
-            .setDuration(300)
+            .setDuration(600)
             .setInterpolator(
                 AccelerateDecelerateInterpolator()
             )

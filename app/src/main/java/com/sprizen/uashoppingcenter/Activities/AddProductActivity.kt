@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.sprizen.uashoppingcenter.R
@@ -34,6 +35,9 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
 
     private val client = OkHttpClient()
+
+
+    private var userId = ""
 
     // ============================================================
     // CURRENT STEP
@@ -99,6 +103,12 @@ class AddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            userId = currentUser.uid
+        }
 
         binding =
             ActivityAddProductBinding.inflate(
@@ -964,6 +974,8 @@ class AddProductActivity : AppCompatActivity() {
 
     private fun uploadProduct() {
 
+
+
         val productName =
             binding.etProductName
                 .text
@@ -1186,7 +1198,9 @@ class AddProductActivity : AppCompatActivity() {
 
             category = category,
 
-            subCategory = subCategory
+            subCategory = subCategory,
+
+            userId = userId
         )
     }
 
@@ -1219,7 +1233,9 @@ class AddProductActivity : AppCompatActivity() {
 
         category: String,
 
-        subCategory: String
+        subCategory: String,
+
+        userId : String
 
     ) {
 
@@ -1251,7 +1267,9 @@ class AddProductActivity : AppCompatActivity() {
 
                 category = category,
 
-                subCategory = subCategory
+                subCategory = subCategory,
+
+                userId = userId
             )
 
             return
@@ -1297,7 +1315,9 @@ class AddProductActivity : AppCompatActivity() {
 
                     category = category,
 
-                    subCategory = subCategory
+                    subCategory = subCategory,
+
+                    userId = userId
                 )
 
             } else {
@@ -1506,7 +1526,9 @@ class AddProductActivity : AppCompatActivity() {
 
         category: String,
 
-        subCategory: String
+        subCategory: String,
+
+        userId: String
 
     ) {
 
@@ -1570,7 +1592,9 @@ class AddProductActivity : AppCompatActivity() {
 
                 "location" to "",
 
-                "rating" to 0.0
+                "rating" to 0.0,
+
+                "userId" to userId
             )
 
 

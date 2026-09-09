@@ -7,7 +7,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F9FAFB"
     android:fitsSystemWindows="true"
     tools:context=".Activities.ProductDetailsActivity">
 
@@ -17,7 +17,7 @@
         android:id="@+id/top_Bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#F9FAFB"
         app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,11 +135,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="1dp">
 
                 <LinearLayout
+                    android:background="#F9FAFB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -312,7 +313,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        app:cardBackgroundColor="#F7F8FA"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 
@@ -425,8 +426,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor="#F7F8FA"
-                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="9.5dp"
                         app:cardElevation="0dp">
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -525,10 +526,10 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#FDFDFD"
+        android:background="#F9FAFB"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -538,7 +539,11 @@
 
 
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:layout_marginStart="9dp"
+                app:cardCornerRadius="10dp"
+                android:background="@drawable/bg_card"
+                app:cardElevation="3dp"
                 android:orientation="horizontal"
                 android:layout_marginVertical="12dp"
                 android:id="@+id/btnAddToCart"
@@ -546,8 +551,15 @@
                 android:layout_weight="1"
                 android:paddingHorizontal="4dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_outline_button"
                 android:gravity="center">
+
+                <LinearLayout
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
 
 
                 <ImageView
@@ -555,17 +567,18 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_carts"/>
+
                     <TextView
                         android:textAllCaps="true"
-                        android:textColor="@color/primaryGreenColor"
+                        android:textColor="#424242"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="12.5sp"
                         android:text="Add to Cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-
-            </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
 
@@ -573,6 +586,8 @@
         <!-- BUY NOW -->
 
         <LinearLayout
+            android:elevation="3.5dp"
+            android:layout_marginEnd="9dp"
             android:orientation="horizontal"
             android:layout_marginVertical="12dp"
             android:id="@+id/btnBuyPruduct"

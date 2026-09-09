@@ -4,20 +4,14 @@
     xmlns:tools="http://tools.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools1="http://schemas.android.com/tools"
     android:id="@+id/tabLayout1"
     android:background="#F9FAFB"
     tools:context=".Fragments.HomeFragment">
 
-    <View
-        android:id="@+id/cartView"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="800dp"
-        android:layout_width="2dp"
-        android:layout_height="2dp"/>
-
-
 
     <com.google.android.material.appbar.AppBarLayout
+        android:layout_marginHorizontal="10dp"
         android:background="#F9FAFB"
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -26,10 +20,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="10dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
@@ -83,14 +76,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:background="#FFFFFF"
-
             app:layout_scrollFlags="scroll|enterAlways"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="10dp"
             android:paddingTop="2dp"
             android:paddingBottom="10dp">
 
@@ -149,8 +139,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginHorizontal="0dp">
+                android:layout_height="190dp">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager"
@@ -187,11 +176,11 @@
             </FrameLayout>
 
             <RelativeLayout
+                android:layout_marginHorizontal="13dp"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="14dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="14dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -216,19 +205,16 @@
 
 
             <LinearLayout
-                android:background="@drawable/orange_button_bg"
-                android:elevation="1dp"
-                android:backgroundTint="@color/white"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/bg_card"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
-                android:layout_marginHorizontal="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -393,20 +379,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:elevation="0.6dp"
-                android:backgroundTint="@color/white"
-                android:background="@drawable/orange_button_bg"
-                android:paddingHorizontal="5dp"
+                android:layout_marginHorizontal="13dp"
+                android:elevation="0.1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:paddingVertical="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -428,19 +410,20 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                tools1:listitem="@layout/item_adapter"
+                android:layout_marginHorizontal="6dp"
                 android:id="@+id/rv_flash_deals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <RelativeLayout
+                android:layout_marginHorizontal="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="24dp">
 
                 <TextView
@@ -464,23 +447,18 @@
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginHorizontal="6dp"
                 android:id="@+id/item_show_home_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="15dp"
                 android:paddingBottom="80dp"
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-<View
-    android:elevation="20dp"
-    android:background="@drawable/screen_bg"
-    android:layout_gravity="top"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"/>
+
 
 
 

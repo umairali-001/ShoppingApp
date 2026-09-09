@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
@@ -31,8 +32,6 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
     lateinit var dataBase: DataBase
 
     var productCarted = mutableListOf<CartSQ>()
-
-
 
 
 
@@ -215,6 +214,7 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
 
         val cartBtnText: TextView = itemView.findViewById(R.id.cart_btn_text)
         val cartBtnImage: ImageView = itemView.findViewById(R.id.cart_btn_image)
+        val ProductCard: CardView = itemView.findViewById(R.id.item_full_card_adapter)
 
 
     }

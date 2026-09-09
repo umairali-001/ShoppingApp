@@ -1,8 +1,10 @@
 package com.sprizen.uashoppingcenter.Activities
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -115,7 +117,6 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                tabLayoutManager(tab.position)
 
             }
 
