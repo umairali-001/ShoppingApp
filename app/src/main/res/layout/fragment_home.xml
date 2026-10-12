@@ -26,6 +26,7 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
+                android:background="@drawable/bg_search"
                 android:id="@+id/btn_notification"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -33,7 +34,7 @@
                 android:src="@drawable/ic_notification"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="#C9000000" />
+                app:tint="@color/lighter_dark" />
 
             <TextView
                 android:layout_marginBottom="5dp"
@@ -41,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ShopUp"
+                android:letterSpacing="0.08"
                 android:textColor="@color/primaryGreenColor"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -49,6 +51,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
+                android:background="@drawable/bg_search"
                 android:id="@+id/btn_search"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -56,9 +59,11 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cart_container" />
+                app:layout_constraintEnd_toStartOf="@id/cart_container"
+                app:tint="@color/lighter_dark" />
 
             <FrameLayout
+                android:background="@drawable/bg_search"
                 android:id="@+id/cart_container"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -68,7 +73,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="3dp"
+                    android:padding="6dp"
                     android:src="@drawable/ic_carts" />
 
 

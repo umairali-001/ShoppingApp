@@ -47,7 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Create Account"
+                    android:text="Sign Up"
+                    android:fontFamily="sans-serif-black"
                     android:textColor="@color/black"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -123,6 +124,14 @@
                         android:textColorHint="#888888"
                         android:textSize="15sp" />
                     <ImageView
+                        android:id="@+id/show_password_eye"
+                        android:src="@drawable/ic_password_show"
+                        android:layout_margin="12dp"
+                        android:padding="3dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end" />
+                    <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center_vertical|start"
@@ -148,6 +157,14 @@
                         android:textColor="#000000"
                         android:textColorHint="#888888"
                         android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/conform_show_password_eye"
+                        android:src="@drawable/ic_password_show"
+                        android:layout_margin="12dp"
+                        android:padding="3dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end" />
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -180,14 +197,13 @@
                 <Button
                     android:id="@+id/SignBT"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="52dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/loginbutton_bg"
                     android:text="CREATE ACCOUNT"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:backgroundTint="@color/primaryGreenColor"/>
 
                 <LinearLayout
@@ -219,22 +235,25 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/lighter_dark"
+                    android:background="@drawable/orange_button_bg"
+                    android:gravity="start"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
                     <!-- Google Card Button -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/googlelogin_BT"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_margin="8dp"
+                        android:layout_width="52dp"
+                        android:layout_height="match_parent"
                         android:clickable="true"
                         android:focusable="true"
+                        android:layout_margin="3dp"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="#FFFFFF"
-                        app:cardCornerRadius="12dp"
+                        app:cardCornerRadius="8dp"
                         app:cardElevation="1dp">
 
                         <ImageView
@@ -244,6 +263,14 @@
                             android:src="@drawable/google" />
                     </androidx.cardview.widget.CardView>
 
+                    <TextView
+                        android:textColor="@color/white"
+                        android:paddingStart="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="18dp"
+                        android:text="Continue With Google"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                     <!-- Apple Card Button -->
                 </LinearLayout>
 

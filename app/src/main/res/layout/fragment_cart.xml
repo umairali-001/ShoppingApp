@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/paymentcard"
+        app:layout_constraintBottom_toBottomOf="@id/paymentcard1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/title_card"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="noScroll">
+                app:layout_scrollFlags="scroll|enterAlways">
 
 
                 <ImageView
@@ -55,7 +55,8 @@
                     android:layout_height="wrap_content"
                     android:text="My Cart"
                     android:textColor="@color/primaryGreenColor"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
+                    android:letterSpacing="0.08"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="250dp"
+                android:paddingBottom="150dp"
                 android:paddingHorizontal="5dp"
                 android:nestedScrollingEnabled="false"
                 tools1:listitem="@layout/cart_adapter" />
@@ -115,14 +117,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#0D000000"
-        app:layout_constraintBottom_toTopOf="@id/paymentcard"
+        app:layout_constraintBottom_toTopOf="@id/paymentcard1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
     <LinearLayout
         android:layout_marginBottom="40dp"
-        android:id="@+id/paymentcard"
+        android:id="@+id/paymentcard1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
@@ -131,11 +133,15 @@
 
 
         <LinearLayout
+            android:id="@+id/paymentcard"
+            android:visibility="visible"
             android:paddingBottom="4dp"
             android:elevation="2dp"
+            android:paddingVertical="8dp"
             android:layout_marginHorizontal="13dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/bg_card"
+            android:layout_marginVertical="1dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/orange_button_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -224,12 +230,16 @@
 
 
         <Button
+            android:id="@+id/btnBuyPruductCart"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
+            android:textSize="16dp"
             android:textAllCaps="false"
             android:layout_marginBottom="25dp"
             android:layout_marginHorizontal="13dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:elevation="0dp"
+            android:layout_height="47dp"
             android:background="@drawable/orange_button_bg"
             android:text="Proceed to Checkout"
             android:textColor="@color/white" />

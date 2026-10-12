@@ -1,246 +1,252 @@
 package com.sprizen.uashoppingcenter.Activities
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.google.api.Context
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
 import com.sprizen.uashoppingcenter.Adapters.AdapterItem
 import com.sprizen.uashoppingcenter.Adapters.ResecntSearhesAdapter
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
+import com.sprizen.uashoppingcenter.DATA_CLASS.SEARCH
 import com.sprizen.uashoppingcenter.DataBase
 import com.sprizen.uashoppingcenter.Fragments.HomeFragment
 import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.databinding.ActivityExploreBinding
-import okhttp3.*
-import java.lang.reflect.Constructor
 
-class ExploreActivity : AppCompatActivity(), ResecntSearhesAdapter.OnSearchItemClickListener {
+class ExploreActivity : AppCompatActivity(),
+    ResecntSearhesAdapter.OnSearchItemClickListener {
 
     lateinit var binding: ActivityExploreBinding
 
-
-    lateinit var productList : MutableList<PRODUCT>
+    lateinit var masterProductList: MutableList<PRODUCT>
+    lateinit var displayedProductList: MutableList<PRODUCT>
 
     lateinit var dataBase: DataBase
-
-    lateinit var adapterItem : AdapterItem
+    lateinit var adapterItem: AdapterItem
     lateinit var rececntSearhesAdapter: ResecntSearhesAdapter
-    lateinit var searchesList : MutableList<String>
-     lateinit var reverseSearchList : MutableList<String>
-
+    lateinit var searchesList: MutableList<SEARCH>
+    lateinit var optimizeSearchList: MutableList<SEARCH>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-
         binding = ActivityExploreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initializeEveryThing()
-
     }
 
     fun initializeEveryThing() {
+        dataBase = DataBase(this@ExploreActivity)
 
-        AllClickListener()
-        dataBase= DataBase(this@ExploreActivity)
-        searchesList = dataBase.getRecentSearches().reversed() as MutableList
-        reverseSearchList = ArrayList()
-        productList = ArrayList()
+        searchesList = dataBase.getRecentSearches()
 
-        adapterItem = AdapterItem(this@ExploreActivity,productList, HomeFragment())
+        masterProductList = ArrayList()
+        displayedProductList = ArrayList()
+        optimizeSearchList = ArrayList()
 
+        // Remove duplicate searches
+        searchesList = searchesList.distinctBy { it.recentSearch }.toMutableList()
 
-        rececntSearhesAdapter= ResecntSearhesAdapter(this@ExploreActivity,searchesList)
-        binding.recentSearchesRecyclerView.adapter= rececntSearhesAdapter
-        binding.recentSearchesRecyclerView.layoutManager
-        val flexboxLayoutManager = FlexboxLayoutManager(this).apply { flexDirection = FlexDirection.ROW
+        // Show maximum 10 unique searches
+        optimizeSearchList = searchesList.take(10).toMutableList()
+
+        adapterItem = AdapterItem(this@ExploreActivity, displayedProductList, HomeFragment())
+
+        rececntSearhesAdapter = ResecntSearhesAdapter(this@ExploreActivity, optimizeSearchList)
+
+        binding.recentSearchesRecyclerView.adapter = rececntSearhesAdapter
+
+        val flexboxLayoutManager = FlexboxLayoutManager(this).apply {
+            flexDirection = FlexDirection.ROW
             flexWrap = FlexWrap.WRAP
             justifyContent = JustifyContent.FLEX_START
             alignItems = AlignItems.FLEX_START
         }
 
         binding.recentSearchesRecyclerView.layoutManager = flexboxLayoutManager
-        binding.recentSearchesRecyclerView.adapter = rececntSearhesAdapter
 
+        setUpRecyclerView()
+        getProductsFromFirebase()
+        AllClickListener()
     }
 
     //=====================================================================================
     //              All ClickListeners
     //=====================================================================================
-    fun AllClickListener(){
-        binding.backIcon.setOnClickListener {
 
-            binding.backIcon.setBackgroundResource(R.drawable.button_click_background)
-            binding.backIcon.postDelayed({ binding.backIcon.background = null }, 50)
+    fun AllClickListener() {
+        binding.backIcon.setOnClickListener {
+            handleBackNavigation()
+        }
+
+        // Search Bar Focus Change
+        binding.searchBar.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.searchLinearLayout.visibility = View.VISIBLE
+                binding.backIcon.visibility = View.VISIBLE
+                binding.productImageRecyclerView.visibility = View.GONE
+            } else {
+                binding.searchLinearLayout.visibility = View.GONE
+                binding.backIcon.visibility = View.GONE
+            }
+        }
+
+        // Search Button
+        binding.searchBtn.setOnClickListener {
+            val recentSearch = binding.searchBar.text.toString().trim()
+            if (recentSearch.isEmpty()) return@setOnClickListener
+
+            dataBase.insertResentSearch(recentSearch)
+
+            binding.searchLinearLayout.visibility = View.GONE
+            binding.productImageRecyclerView.visibility = View.VISIBLE
+            binding.backIcon.visibility = View.VISIBLE
+            binding.searchBar.clearFocus()
+
+            searchProducts(recentSearch)
+        }
+
+        // Clear Recent Searches (Soft Delete implementation)
+        binding.clearSearchBtn.setOnClickListener {
+            // Database se sabhi searches ko soft delete (IS_DELETED = 'TRUE') kar denge
+            dataBase.deleteAllSearches()
+
+            searchesList.clear()
+            optimizeSearchList.clear()
+
+            rececntSearhesAdapter = ResecntSearhesAdapter(
+                this@ExploreActivity,
+                optimizeSearchList
+            )
+            binding.recentSearchesRecyclerView.adapter = rececntSearhesAdapter
+        }
+    }
+
+    private fun handleBackNavigation() {
+        if (binding.productImageRecyclerView.visibility == View.VISIBLE &&
+            binding.searchLinearLayout.visibility == View.GONE) {
+
+            binding.productImageRecyclerView.visibility = View.GONE
+            binding.searchLinearLayout.visibility = View.VISIBLE
+            binding.searchBar.requestFocus()
+        } else {
             finish()
         }
-
-        binding.searchBtn.setOnClickListener {
-            if (binding.searchBar.text.isEmpty()){
-
-                return@setOnClickListener
-
-            }else {
-
-                var recentSearch = binding.searchBar.text.toString()
-
-                var result = dataBase.insertResentSearch(recentSearch)
-
-                Toast.makeText(this@ExploreActivity, recentSearch, Toast.LENGTH_SHORT).show()
-
-                Toast.makeText(this@ExploreActivity, result, Toast.LENGTH_SHORT).show()
-
-                binding.searchLinearLayout.visibility = View.GONE
-
-                getProductsFromFirebase()
-                binding.productImageRecyclerView.visibility = View.VISIBLE
-                binding.searchBar.clearFocus()
-                setUpRecyclerView()
-
-
-
-            }
-            binding.searchBar.setOnClickListener {
-                if (binding.searchLinearLayout.visibility== View.GONE){
-                    binding.searchLinearLayout.visibility = View.VISIBLE
-                }
-                else{
-                    return@setOnClickListener
-                }
-            }
-
-
-
-        }
     }
+
+    override fun onBackPressed() {
+        handleBackNavigation()
+    }
+
+    //=====================================================================================
+    //              Get Products From Firebase
+    //=====================================================================================
 
     fun getProductsFromFirebase() {
+        val database = FirebaseDatabase
+            .getInstance()
+            .getReference("products")
 
-        var database = FirebaseDatabase.getInstance().getReference("products")
+        database.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    masterProductList.clear()
 
-        database.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                productList.clear()
-
-                for (child in snapshot.children) {
-
-                    var product = child.getValue(PRODUCT::class.java)
-                    if (product != null) {
-
-                        // Firebase key
-                        if (product.productId.isEmpty()) {
-
-                            product.productId =
-                                child.key ?: ""
+                    for (child in snapshot.children) {
+                        val product = child.getValue(PRODUCT::class.java)
+                        if (product != null) {
+                            if (product.productId.isEmpty()) {
+                                product.productId = child.key ?: ""
+                            }
+                            masterProductList.add(product)
                         }
-
-
-                        productList.add(product)
                     }
+
+                    val uniqueProducts = masterProductList.distinctBy { it.productId }
+                    masterProductList.clear()
+                    masterProductList.addAll(uniqueProducts)
+
+                    displayedProductList.clear()
+                    displayedProductList.addAll(masterProductList)
+                    adapterItem.notifyDataSetChanged()
                 }
 
-
-                adapterItem.notifyDataSetChanged()
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@ExploreActivity,
+                        "Firebase Error: ${error.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-
-
-            override fun onCancelled(error: DatabaseError) {
-
-                Toast.makeText(this@ExploreActivity, "Firebase Error: ${error.message}", Toast.LENGTH_LONG).show()
-            }
-        })
+        )
     }
 
-    fun setUpRecyclerView(){
+    //=====================================================================================
+    //              Search Products
+    //=====================================================================================
 
+    fun searchProducts(queryText: String) {
+        val query = queryText.trim().lowercase()
+        if (query.isEmpty()) return
 
-        var recyclerView = binding.productImageRecyclerView
+        val result = masterProductList
+            .filter { product ->
+                product.productName.lowercase().contains(query)
+            }
+            .distinctBy { it.productId }
+            .sortedByDescending { product ->
+                val title = product.productName.lowercase()
+                title.windowed(query.length).count { it == query }
+            }
 
+        displayedProductList.clear()
+        displayedProductList.addAll(result)
+        adapterItem.notifyDataSetChanged()
 
+        binding.productImageRecyclerView.visibility = View.VISIBLE
+    }
+
+    //=====================================================================================
+    //              RecyclerView
+    //=====================================================================================
+
+    fun setUpRecyclerView() {
+        val recyclerView = binding.productImageRecyclerView
         recyclerView.adapter = adapterItem
-
-        recyclerView.layoutManager = GridLayoutManager(this@ExploreActivity, 2, GridLayoutManager.VERTICAL, false)
-
-
+        recyclerView.layoutManager = GridLayoutManager(
+            this@ExploreActivity,
+            2,
+            GridLayoutManager.VERTICAL,
+            false
+        )
         recyclerView.setHasFixedSize(true)
-
         recyclerView.setItemViewCacheSize(20)
+    }
 
-            val query = binding.searchBar.text.toString().trim().lowercase()
-
-            if (query.isEmpty()) return
-
-            FirebaseFirestore.getInstance()
-                .collection("products")
-                .get()
-                .addOnSuccessListener { documents ->
-
-                    val result = documents.documents.filter { document ->
-
-                        val title = document.getString("title")
-                            ?.lowercase()
-                            ?: ""
-
-                        title.contains(query)
-                    }.toMutableList()
-
-                    result.sortWith(Comparator { product1, product2 ->
-
-                        val title1 = product1.getString("title")
-                            ?.lowercase()
-                            ?: ""
-
-                        val title2 = product2.getString("title")
-                            ?.lowercase()
-                            ?: ""
-
-                        val count1 = title1
-                            .windowed(query.length)
-                            .count { it == query }
-
-                        val count2 = title2
-                            .windowed(query.length)
-                            .count { it == query }
-
-                        count2 - count1
-                    })
-
-                    // Ab result already relevance ke according sorted hai
-                    // RecyclerView ko result pass karein
-                }
-        }
+    //=====================================================================================
+    //              Recent Search Click
+    //=====================================================================================
 
     override fun onItemClick(itemText: String) {
         binding.searchBar.setText(itemText)
-
         binding.searchLinearLayout.visibility = View.GONE
-
-        getProductsFromFirebase()
         binding.productImageRecyclerView.visibility = View.VISIBLE
         binding.searchBar.clearFocus()
 
-
+        searchProducts(itemText)
     }
-
-
 }

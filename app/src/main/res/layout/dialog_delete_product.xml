@@ -8,6 +8,7 @@
 
     <TextView
 
+        android:layout_marginTop="5dp"
         android:id="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
@@ -19,32 +20,39 @@
         android:text="Are You Sure You Want to Deleted"
         android:layout_width="match_parent"
         android:layout_height="40dp"/>
+
     <Button
-        android:elevation="3dp"
         android:id="@+id/dialog_Cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/orange_button_bg"
+        android:backgroundTint="@color/unselected_fragment_tint"
+        android:elevation="0dp"
         android:text="Cancel"
         android:textColor="#494848"
         android:textStyle="bold"
-        app:layout_constraintWidth_percent="0.4"
-        android:background="@drawable/bg_outline_button"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
-        android:layout_width="0dp"
-        android:layout_height="45dp"/>
+        app:layout_constraintWidth_percent="0.4" />
+
     <Button
-        android:textStyle="bold"
         android:id="@+id/dialog_Delete_btn"
-        android:textColor="@color/white"
-        android:text="Delete"
-        android:layout_marginEnd="9dp"
-        app:layout_constraintWidth_percent="0.4"
-        android:background="@drawable/orange_button_bg"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/orange_button_bg"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
-        android:layout_width="0dp"
-        android:layout_height="45dp"/>
+        app:layout_constraintWidth_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.sprizen.uashoppingcenter.Adapters
 
 import android.content.Context
 import android.content.Intent
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -51,18 +52,27 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
 
     override fun onBindViewHolder(binding: ViewHolder, position: Int) {
 
+        var position = binding.bindingAdapterPosition
         val product = itemList[position]
 
         // First Cloudinary image
         val imageUrl = product.imagesUrls.firstOrNull()
+        val optimizedImageUrl = imageUrl?.replace(
+            "/upload/",
+            "/upload/w_600,h_600,c_fill,q_auto,f_auto/"
+        )
 
         Glide.with(context)
-            .load(imageUrl)
-
+            .load(optimizedImageUrl)
+            .skipMemoryCache(true)
+            .override(600,600)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .centerCrop()
+            .placeholder(R.drawable.placeholder)
             .into(binding.imageUrl)
 
         // Product name
+
         binding.itemName.text = product.productName
 
         // Selling price

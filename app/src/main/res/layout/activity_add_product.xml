@@ -213,12 +213,14 @@
 
 
                     <LinearLayout
+                        android:elevation="3dp"
+                        android:backgroundTint="#F7F7F7"
                         android:id="@+id/boxAddImage"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_seller_btn"
+                        android:background="@drawable/orange_button_bg"
                         android:clickable="true"
                         android:focusable="true"
                         android:gravity="center">
@@ -248,9 +250,9 @@
                 <EditText
                     android:id="@+id/etProductName"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="Product Name"
                     android:inputType="text"
                     android:paddingHorizontal="12dp"
@@ -271,12 +273,12 @@
                     android:textStyle="bold" />
 
                 <Spinner
+                    android:paddingHorizontal="10sp"
                     android:id="@+id/category_Spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal" />
-
+                    android:background="@drawable/input_bg_outline"/>
 
                 <!-- Sub Category -->
 
@@ -290,11 +292,12 @@
                     android:textStyle="bold" />
 
                 <Spinner
+                    android:paddingHorizontal="10dp"
                     android:id="@+id/sub_category_Spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal" />
+                    android:background="@drawable/input_bg_outline" />
 
 
                 <!-- Brand -->
@@ -311,9 +314,9 @@
                 <EditText
                     android:id="@+id/etBrand"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="Brand Name"
                     android:inputType="text"
                     android:paddingHorizontal="12dp"
@@ -347,7 +350,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Selling Price (₹) *"
+                    android:text="Maximum Retail Price(₹) *"
                     android:textColor="#555555"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -355,9 +358,9 @@
                 <EditText
                     android:id="@+id/etSellingPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="1299"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
@@ -368,7 +371,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="MRP (₹) *"
+                    android:text="Selling Price (₹) *"
                     android:textColor="#555555"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -376,10 +379,10 @@
                 <EditText
                     android:id="@+id/etMrp"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
-                    android:hint="2499"
+                    android:background="@drawable/input_bg_outline"
+                    android:hint="999"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
                     android:textColor="#000000" />
@@ -397,11 +400,32 @@
                 <EditText
                     android:id="@+id/etDiscount"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="48"
                     android:inputType="number"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Price After Discount (%)"
+                    android:textColor="#555555"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAfterDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/input_bg_outline"
+                    android:hint="800"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"
                     android:paddingHorizontal="12dp"
                     android:textColor="#000000" />
 
@@ -418,9 +442,9 @@
                 <EditText
                     android:id="@+id/etTax"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="18"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
@@ -452,7 +476,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="SKU *"
+                    android:text="Stock Keeping Unit *"
                     android:textColor="#555555"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -460,9 +484,9 @@
                 <EditText
                     android:id="@+id/etSku"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="WH-001"
                     android:inputType="text"
                     android:paddingHorizontal="12dp"
@@ -480,9 +504,9 @@
                 <EditText
                     android:id="@+id/etStockQuantity"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="45"
                     android:inputType="number"
                     android:paddingHorizontal="12dp"
@@ -500,9 +524,9 @@
                 <EditText
                     android:id="@+id/etLowStockAlert"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="5"
                     android:inputType="number"
                     android:paddingHorizontal="12dp"
@@ -552,7 +576,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:gravity="top"
                     android:hint="Short description..."
                     android:inputType="textMultiLine"
@@ -583,7 +607,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:gravity="top"
                     android:hint="Long description..."
                     android:inputType="textMultiLine"
@@ -636,7 +660,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:layout_marginTop="8dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="12dp">
@@ -655,11 +679,6 @@
                         android:textColor="#000000"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/checkbox_on_background"
-                        app:tint="#00A36C" />
 
                 </LinearLayout>
 
@@ -669,7 +688,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:layout_marginTop="12dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="12dp">
@@ -677,7 +696,7 @@
                     <View
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="#002244" />
+                        android:background="#215B95" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -748,9 +767,9 @@
                 <EditText
                     android:id="@+id/etWeight"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
+                    android:background="@drawable/input_bg_outline"
                     android:hint="0.35"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
@@ -773,9 +792,10 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:background="@drawable/input_bg_outline"
                         android:id="@+id/etDimensionL"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="54dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="18"
@@ -787,9 +807,10 @@
                         android:layout_height="1dp" />
 
                     <EditText
+                        android:background="@drawable/input_bg_outline"
                         android:id="@+id/etDimensionW"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="54dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="15"
@@ -801,9 +822,10 @@
                         android:layout_height="1dp" />
 
                     <EditText
+                        android:background="@drawable/input_bg_outline"
                         android:id="@+id/etDimensionH"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="54dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="8"
@@ -823,9 +845,11 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/input_bg_outline"
                     android:id="@+id/etShippingCharges"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="6dp"
                     android:hint="0"
                     android:inputType="numberDecimal"
@@ -864,7 +888,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="330dp"
                     android:layout_marginTop="16dp"
                     app:cardBackgroundColor="#F7F7F7"
                     app:cardCornerRadius="12dp"
@@ -975,7 +999,7 @@
         <Button
             android:id="@+id/btnPreviewBack"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:background="@drawable/bg_seller_btn"
@@ -989,7 +1013,7 @@
         <Button
             android:id="@+id/btnNext"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_weight="2"
             android:background="@drawable/orange_button_bg"
             android:text="Next"

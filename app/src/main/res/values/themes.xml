@@ -7,7 +7,9 @@
     </style>
     <style name="SpinnerTextColor" parent="Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/black</item>
+        <item name="android:background">@color/white</item>
     </style>
+
 
     <style name="Theme.UAShoppingCenter" parent="Base.Theme.UAShoppingCenter" />
 </resources>

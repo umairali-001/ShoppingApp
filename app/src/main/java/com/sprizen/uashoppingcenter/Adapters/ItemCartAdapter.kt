@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.sprizen.uashoppingcenter.DATA_CLASS.OrderItem
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
 import com.sprizen.uashoppingcenter.DataBase
 import com.sprizen.uashoppingcenter.Fragments.CartFragment
@@ -22,203 +23,182 @@ import com.sprizen.uashoppingcenter.R
 import com.sprizen.uashoppingcenter.databinding.FragmentCartBinding
 
 class ItemCartAdapter(
-    context: Context, itemList: MutableList<PRODUCT>,
-    bindingCartF:
-    FragmentCartBinding,
-    var listener: CartFragment,
-) :
-    RecyclerView.Adapter<ItemCartAdapter.ViewHolder>() {
+    private val context: Context,
+    private val itemList: MutableList<PRODUCT>,
+    private val bindingCartF: FragmentCartBinding,
+    private var listener: OnProductCheckedListener
+) : RecyclerView.Adapter<ItemCartAdapter.ViewHolder>() {
 
+    private val dataBase: DataBase = DataBase(context)
 
-    var context: Context
-    var itemList: MutableList<PRODUCT>
+    // Sirf wahi product IDs store hongi jo user check/tick karega
+    private val selectedProducts = mutableSetOf<String>()
+    private val productQuantities = mutableMapOf<String, Int>()
 
-    var isItemChecked = false
-    var bindingCartF: FragmentCartBinding
-
-    var totalPrice = 0
-    var dataBase: DataBase
-
-    var itemQuantity = 1
-
-    var selectedList = mutableListOf<PRODUCT>()
-
-    var itemCoutList = MutableList(itemList.size) { 1 }
-
-    init {
-        this.context = context
-        this.itemList = itemList
-        dataBase = DataBase(context)
-        this.bindingCartF = bindingCartF
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.cart_adapter, parent, false)
+        return ViewHolder(view)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentPosition = holder.bindingAdapterPosition
+        if (currentPosition == RecyclerView.NO_POSITION) return
 
-    override fun onCreateViewHolder(p0: ViewGroup, position: Int): ItemCartAdapter.ViewHolder {
+        val product = itemList[currentPosition]
+        val productId = product.productId
 
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.cart_adapter, null))
-    }
+        // Default Quantity = 1
+        if (!productQuantities.containsKey(productId)) {
+            productQuantities[productId] = 1
+        }
+        val currentQty = productQuantities[productId] ?: 1
 
+        holder.productName.text = product.productName
+        holder.productPrice.text = "Rs:${product.productPriceSelling}"
+        holder.productOldPrice.text = "Rs:${product.productPriceActual}"
+        holder.productDesc.text = "${product.discountOfProduct}% OFF"
+        holder.quantity.text = "$currentQty"
 
-    override fun onBindViewHolder(binding: ItemCartAdapter.ViewHolder, position: Int) {
-
-        try {
-
-            itemCoutList.add(1)
-
-
-            var position = binding.bindingAdapterPosition
-
-
-            binding.productName.text = itemList[position].productName
-            binding.productPrice.text = "Rs:${itemList[position].productPriceSelling}"
-            binding.productOldPrice.text = "Rs:${itemList[position].productPriceActual}"
-            binding.productDesc.text = "${itemList[position].discountOfProduct} OFF"
-
-
-
-
+        if (product.imagesUrls.isNotEmpty()) {
             Glide.with(context)
-                .load(itemList[position].imagesUrls[0])
-
+                .load(product.imagesUrls[0])
                 .centerCrop()
-                .into(binding.productImage)
-
-
-            var product = itemList[position]
-            var price = itemList[position].productPriceSelling.toInt()
-
-            binding.chackBox.setOnCheckedChangeListener(null)
-            binding.chackBox.setOnCheckedChangeListener { _, isChacked ->
-
-
-                if (isChacked) {
-                    selectedList.add(product)
-                    totalPrice += price * itemCoutList[position]
-                    isItemChecked=true
-
-                }else{
-
-                    totalPrice -= price * itemCoutList[position]
-                    selectedList.remove(product)
-
-                }
-
-                    binding.quantity.text = "${itemCoutList[position]}"
-                    listener.onProductChecked(selectedList.size, totalPrice)
-
-            }
-
-
-            binding.btn_minus.setOnClickListener {
-
-                if (itemCoutList[position] > 1) {
-
-                    if (binding.chackBox.isChecked) {
-                        totalPrice -= price
-                    }
-
-                    itemCoutList[position] = itemCoutList[position] - 1
-                }
-
-                binding.quantity.text = "${itemCoutList[position]}"
-                listener.onProductChecked(selectedList.size, totalPrice)
-            }
-
-            binding.btn_pluse.setOnClickListener {
-
-                if (itemCoutList[position] < itemList[position].stockAvailable) {
-
-                    if (binding.chackBox.isChecked) {
-                        totalPrice += price
-                    }
-
-                    itemCoutList[position] = itemCoutList[position] + 1
-                }
-
-                binding.quantity.text = "${itemCoutList[position]}"
-                listener.onProductChecked(selectedList.size, totalPrice)
-            }
-
-            binding.deleteBtn.setOnClickListener {
-                if (binding.chackBox.isChecked){
-                    binding.chackBox.isChecked = false
-                }
-                deleteDilog(position)
-            }
-        } catch (e: Exception) {
-
-            e.stackTrace
-
+                .into(holder.productImage)
         }
 
+        // Checkbox recycling bug fix karne ke liye listener pehle clear karein
+        holder.chackBox.setOnCheckedChangeListener(null)
+        holder.chackBox.isChecked = selectedProducts.contains(productId)
+
+        // Checkbox toggle handler
+        holder.chackBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                selectedProducts.add(productId)
+            } else {
+                selectedProducts.remove(productId)
+            }
+            recalculateTotal()
+        }
+
+        holder.btn_minus.setOnClickListener {
+            val qty = productQuantities[productId] ?: 1
+            if (qty > 1) {
+                val newQty = qty - 1
+                productQuantities[productId] = newQty
+                holder.quantity.text = "$newQty"
+                recalculateTotal()
+            }
+        }
+
+        holder.btn_pluse.setOnClickListener {
+            val qty = productQuantities[productId] ?: 1
+            val maxStock = if (product.stockAvailable > 0) product.stockAvailable else 100
+            if (qty < maxStock) {
+                val newQty = qty + 1
+                productQuantities[productId] = newQty
+                holder.quantity.text = "$newQty"
+                recalculateTotal()
+            } else {
+                Toast.makeText(context, "Stock limit reached", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        holder.deleteBtn.setOnClickListener {
+            deleteDialog(currentPosition)
+        }
     }
+
+    private fun recalculateTotal() {
+        var total = 0
+        var selectedCount = 0
+
+        for (product in itemList) {
+            if (selectedProducts.contains(product.productId)) {
+                val qty = productQuantities[product.productId] ?: 1
+                val price = product.productPriceSelling.toDouble()?.toInt() ?: 0
+                total += (price * qty)
+                selectedCount++
+            }
+        }
+
+        listener.onProductChecked(selectedCount, total)
+    }
+
+    // Ye function sirf un items ko return karega jo user ne tick (select) kiye hain
+    fun getSelectedOrderItems(): ArrayList<OrderItem> {
+        val selectedList = ArrayList<OrderItem>()
+
+        for (product in itemList) {
+            if (selectedProducts.contains(product.productId)) {
+                val qty = productQuantities[product.productId] ?: 1
+                val price = product.productPriceSelling.toDouble() ?: 0.0
+
+                selectedList.add(
+                    OrderItem(
+                        productId = product.productId,
+                        productName = product.productName,
+                        price = price,
+                        quantity = qty,
+                        imageUrl = product.imagesUrls.firstOrNull() ?: ""
+                    )
+                )
+            }
+        }
+        return selectedList
+    }
+
+    override fun getItemCount(): Int = itemList.size
 
     interface OnProductCheckedListener {
         fun onProductChecked(itemCount: Int, price: Int)
-
-    }
-
-    override fun getItemCount(): Int {
-        return itemList.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        var productImage = itemView.findViewById<ImageView>(R.id.iv_cart_product_image)
-        var productName = itemView.findViewById<TextView>(R.id.tv_product_title)
-        var productPrice = itemView.findViewById<TextView>(R.id.tv_product_price)
-        var productOldPrice = itemView.findViewById<TextView>(R.id.tv_old_price)
-        var productDesc = itemView.findViewById<TextView>(R.id.tv_discount_tag)
-
-
-        var deleteBtn = itemView.findViewById<ImageView>(R.id.btn_delete)
-
-
-        var chackBox = itemView.findViewById<CheckBox>(R.id.cb_select_product)
-
-        var btn_minus = itemView.findViewById<ImageView>(R.id.btn_minus)
-
-        var btn_pluse = itemView.findViewById<ImageView>(R.id.btn_plus)
-
-        var quantity = itemView.findViewById<TextView>(R.id.tv_qty_count)
-
-
+        val productImage: ImageView = itemView.findViewById(R.id.iv_cart_product_image)
+        val productName: TextView = itemView.findViewById(R.id.tv_product_title)
+        val productPrice: TextView = itemView.findViewById(R.id.tv_product_price)
+        val productOldPrice: TextView = itemView.findViewById(R.id.tv_old_price)
+        val productDesc: TextView = itemView.findViewById(R.id.tv_discount_tag)
+        val deleteBtn: ImageView = itemView.findViewById(R.id.btn_delete)
+        val chackBox: CheckBox = itemView.findViewById(R.id.cb_select_product)
+        val btn_minus: ImageView = itemView.findViewById(R.id.btn_minus)
+        val btn_pluse: ImageView = itemView.findViewById(R.id.btn_plus)
+        val quantity: TextView = itemView.findViewById(R.id.tv_qty_count)
     }
 
-
     @SuppressLint("MissingInflatedId")
-    fun deleteDilog(position: Int) {
-        var builder = AlertDialog.Builder(context)
-        var layout = LayoutInflater.from(context).inflate(R.layout.dialog_delete_product, null)
+    private fun deleteDialog(position: Int) {
+        val builder = AlertDialog.Builder(context)
+        val layout = LayoutInflater.from(context).inflate(R.layout.dialog_delete_product, null)
         builder.setView(layout)
-        var dailog = builder.create()
-        dailog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dailog.show()
+        val dialog = builder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
 
-        var cnacelBtn = layout.findViewById<Button>(R.id.dialog_Cancel_btn)
-        var deleteBtn = layout.findViewById<Button>(R.id.dialog_Delete_btn)
-        cnacelBtn.setOnClickListener {
-            dailog.dismiss()
+        val cancelBtn = layout.findViewById<Button>(R.id.dialog_Cancel_btn)
+        val deleteBtn = layout.findViewById<Button>(R.id.dialog_Delete_btn)
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
         }
 
         deleteBtn.setOnClickListener {
             try {
-                dataBase.deleteProduct(itemList[position].productId)
-                itemList.removeAt(position)
-                itemCoutList.removeAt(position)
+                val product = itemList[position]
+                selectedProducts.remove(product.productId)
+                productQuantities.remove(product.productId)
 
+                dataBase.deleteProduct(product.productId)
+                itemList.removeAt(position)
 
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemList.size)
-                dailog.dismiss()
+                recalculateTotal()
 
+                dialog.dismiss()
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-            catch (e: Exception){
-                Toast.makeText(context, "${e}", Toast.LENGTH_SHORT).show()
-                e.stackTrace
-            }
-
         }
     }
 }

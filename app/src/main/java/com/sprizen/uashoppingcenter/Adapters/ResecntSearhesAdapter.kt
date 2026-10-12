@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sprizen.uashoppingcenter.Activities.ExploreActivity
+import com.sprizen.uashoppingcenter.DATA_CLASS.SEARCH
 
 
-class ResecntSearhesAdapter(context: Context, searchesList: MutableList<String>): RecyclerView.Adapter<ResecntSearhesAdapter.ViewHolder>(){
+class ResecntSearhesAdapter(context: Context, searchesList: MutableList<SEARCH>): RecyclerView
+    .Adapter<ResecntSearhesAdapter.ViewHolder>(){
 
     var context : Context
-    var searchesList : MutableList<String>
+    var searchesList : MutableList<SEARCH>
 
 
 
@@ -37,11 +39,11 @@ class ResecntSearhesAdapter(context: Context, searchesList: MutableList<String>)
 
     override fun onBindViewHolder(binding: ResecntSearhesAdapter.ViewHolder, position: Int) {
 
-        binding.searchText.text = searchesList[position].toString()
+        binding.searchText.text = searchesList[position].recentSearch.toString()
 
         binding.itemView.setOnClickListener {
 
-                onItemClickListener.onItemClick(searchesList[position].toString())
+                onItemClickListener.onItemClick(searchesList[position].recentSearch.toString())
 
         }
 

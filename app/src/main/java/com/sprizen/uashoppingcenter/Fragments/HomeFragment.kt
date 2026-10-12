@@ -43,8 +43,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
     lateinit var sliderAdapter: SliderAdapter
 
 
-
-
     val sliderImages = listOf(R.drawable.image_1, R.drawable.images_2, R.drawable.images_3)
 
     private val sliderHandler = Handler(Looper.getMainLooper())
@@ -63,21 +61,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
             }
         }
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentHomeBinding.bind(view)
-
-        initializeEveryThing()
-
-    }
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -150,7 +133,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
 
             binding.btnSearch.setBackgroundResource(R.drawable.button_click_background)
             binding.btnSearch.postDelayed({ binding.btnSearch.background=null },50)
+            binding.btnSearch.setBackgroundResource(R.drawable.bg_search)
             startActivity(Intent(requireContext(), ExploreActivity::class.java))
+
         }
 
         binding.cartContainer.setOnClickListener {
@@ -163,13 +148,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
             else{
 
             }
+            binding.cartContainer.setBackgroundResource(R.drawable.bg_search)
         }
         binding.btnNotification.setOnClickListener {
 
-
             binding.btnNotification.setBackgroundResource(R.drawable.button_click_background)
             binding.btnNotification.postDelayed({ binding.btnNotification.background=null },50)
-            startActivity(Intent(requireContext(), ExploreActivity::class.java))
+            binding.btnNotification.setBackgroundResource(R.drawable.bg_search)
         }
 
 
@@ -407,24 +392,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
             startAutoSlider()
         }
 
-        adapterItem = AdapterItem(requireContext(), itemList,this@HomeFragment)
-
-
-        // ==========================================
-        // RECYCLER VIEW
-        // ==========================================
-
-        var recyclerView = binding.itemShowHomeRecyclerView
-
-
-        recyclerView.adapter = adapterItem
-
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-
-
-        recyclerView.setHasFixedSize(true)
-
-        recyclerView.setItemViewCacheSize(20)
 
     }
 

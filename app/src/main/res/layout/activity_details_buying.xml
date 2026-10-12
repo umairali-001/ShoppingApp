@@ -8,87 +8,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9FAFB"
-    android:fitsSystemWindows="true"
     tools:context=".Activities.ProductDetailsActivity">
 
     <!-- ==================== TOP BAR ==================== -->
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/top_Bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F9FAFB"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingHorizontal="10dp">
-
-            <!-- Back -->
-
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:padding="7dp"
-                android:src="@drawable/ic_back"
-                android:contentDescription="Back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
-
-            <!-- Share -->
-
-            <ImageView
-                android:id="@+id/btnShare"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="4dp"
-                android:layout_marginEnd="18dp"
-                android:src="@android:drawable/ic_menu_share"
-                android:contentDescription="Share"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btnFavoriteTop"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
-
-            <!-- Favorite -->
-
-            <ImageView
-                android:id="@+id/btnFavoriteTop"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="3dp"
-                android:layout_marginEnd="18dp"
-                android:src="@drawable/ic_wishlist"
-                android:contentDescription="Favorite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cart_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/primaryGreenColor" />
-
-            <!-- Cart -->
-
-            <ImageView
-                android:id="@+id/cart_button"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="2dp"
-                android:src="@drawable/ic_cart"
-                android:contentDescription="Cart"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
 
     <!-- ==================== SCROLL CONTENT ==================== -->
 
@@ -101,18 +23,99 @@
         app:layout_constraintBottom_toTopOf="@id/divider_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_Bar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/top_Bar"
+                android:elevation="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="50dp"
+                    android:paddingBottom="8dp"
+                    android:paddingHorizontal="10dp">
+
+                    <!-- Back -->
+
+                    <ImageView
+                        android:background="@drawable/bg_search"
+                        android:id="@+id/backIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#4B5159" />
+
+                    <!-- Share -->
+
+                    <ImageView
+                        android:background="@drawable/bg_search"
+                        android:id="@+id/btnShare"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:layout_marginEnd="18dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:contentDescription="Share"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnFavoriteTop"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#4B5159" />
+
+                    <!-- Favorite -->
+
+                    <ImageView
+                        android:background="@drawable/bg_search"
+                        android:id="@+id/btnFavoriteTop"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:layout_marginEnd="18dp"
+                        android:src="@drawable/ic_wishlist"
+                        android:contentDescription="Favorite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/cart_button"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/primaryGreenColor" />
+
+                    <!-- Cart -->
+
+                    <ImageView
+                        android:background="@drawable/bg_search"
+                        android:id="@+id/cart_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_carts"
+                        android:contentDescription="Cart"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
             <!-- ==================== PRODUCT IMAGES ==================== -->
 
             <androidx.cardview.widget.CardView
+                android:layout_marginTop="-62dp"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="400dp"
                 app:cardBackgroundColor="#F7F8FA"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp">
@@ -122,6 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
+                    android:paddingHorizontal="0dp"
                     android:orientation="horizontal"
                     android:overScrollMode="never"
                     tools:listitem="@layout/adapter_products_images" />
@@ -134,13 +138,13 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="1dp">
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="-40dp"
+                android:outlineProvider="background"
+                android:outlineSpotShadowColor="@color/black">
 
                 <LinearLayout
-                    android:background="#F9FAFB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -150,13 +154,14 @@
                     <!-- ==================== CATEGORY ==================== -->
 
                     <TextView
+                        android:layout_marginTop="1dp"
                         android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/item_category"
+                        android:background="@drawable/bg_recent_search"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
-                        android:text="Product"
+                        android:text="Best Seller"
                         android:textColor="@color/primaryGreenColor"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -170,6 +175,7 @@
                         android:layout_marginTop="10dp">
 
                         <TextView
+                            android:fontFamily=""
                             android:id="@+id/tvTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -179,11 +185,12 @@
                             android:maxLines="3"
                             android:ellipsize="end"
                             android:text="Product Name"
-                            android:textColor="@color/black"
-                            android:textSize="19sp"
+                            android:textColor="@color/lighter_dark"
+                            android:textSize="23sp"
                             android:textStyle="bold" />
 
                         <ImageView
+                            android:background="@drawable/bg_search_input"
                             android:id="@+id/btnWishlist"
                             android:layout_width="34dp"
                             android:layout_height="34dp"
@@ -210,7 +217,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="★ 0.0"
-                            android:textColor="@color/primaryGreenColor"
+                            android:textColor="@color/price_orange"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -235,7 +242,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:text="✔ Assured"
-                            android:textColor="#757575"
+                            android:textColor="#46AB06"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -256,10 +263,11 @@
                             android:layout_height="wrap_content"
                             android:text="₹0"
                             android:textColor="@color/primaryGreenColor"
-                            android:textSize="23sp"
+                            android:textSize="25sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:layout_marginTop="4dp"
                             android:id="@+id/tvActualPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -270,6 +278,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:layout_marginTop="4dp"
                             android:id="@+id/tvDiscount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -312,12 +321,13 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 
                         <LinearLayout
+                            android:background="@drawable/input_bg_outline"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -434,9 +444,10 @@
                             android:id="@+id/colorsRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg_outline"
                             android:clipToPadding="false"
-                            android:padding="10dp"
                             android:overScrollMode="never"
+                            android:padding="10dp"
                             tools:listitem="@layout/adapter_colors" />
 
                     </androidx.cardview.widget.CardView>
@@ -513,8 +524,8 @@
     <View
         android:id="@+id/divider_top"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EAEAEA"
+        android:layout_height="0.8dp"
+        android:background="#E7E7E7"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -522,10 +533,12 @@
 
     <!-- ==================== BOTTOM BAR ==================== -->
 
+
     <LinearLayout
+        android:backgroundTint="#0A339070"
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="70dp"
         android:background="#F9FAFB"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -538,70 +551,57 @@
         <!-- ADD TO CART -->
 
 
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginStart="9dp"
-                app:cardCornerRadius="10dp"
-                android:background="@drawable/bg_card"
-                app:cardElevation="3dp"
-                android:orientation="horizontal"
-                android:layout_marginVertical="12dp"
-                android:id="@+id/btnAddToCart"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:paddingHorizontal="4dp"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-                <LinearLayout
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_outline_button"
+            android:gravity="center"
+            android:orientation="horizontal">
 
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_carts" />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_carts"/>
-
-                    <TextView
-                        android:textAllCaps="true"
-                        android:textColor="#424242"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="12.5sp"
-                        android:text="Add to Cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:paddingEnd="10dp"
+                android:text="Add to Cart"
+                android:textAllCaps="false"
+                android:textColor="#424242"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
 
         <!-- BUY NOW -->
 
         <LinearLayout
-            android:elevation="3.5dp"
-            android:layout_marginEnd="9dp"
+            android:elevation="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:orientation="horizontal"
             android:layout_marginVertical="12dp"
             android:id="@+id/btnBuyPruduct"
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_marginStart="10dp"
-            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_height="47dp"
             android:background="@drawable/orange_button_bg"
             android:gravity="center">
 
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_flash"
                 app:tint="@color/white" />
@@ -609,7 +609,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:textSize="12.5sp"
+                android:textSize="15sp"
                 android:text="Buy Now"
                 android:textAllCaps="true"
                 android:layout_width="wrap_content"
