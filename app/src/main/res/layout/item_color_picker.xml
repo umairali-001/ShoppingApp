@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/input_bg_outline"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_marginVertical="5dp"
+    android:paddingHorizontal="18dp"
+    android:paddingVertical="9dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardColorCircle"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        app:cardCornerRadius="45dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#CBD5E1"
+        app:strokeWidth="1dp">
+
+        <View
+            android:background="@color/black"
+            android:id="@+id/viewColorCircle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvColorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="Black"
+        android:textColor="#0F172A"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/arrowImage"
+        android:rotation="45"
+        android:layout_width="18dp"
+        android:layout_height="19dp"
+        android:src="@drawable/ic_plus" />
+</LinearLayout>

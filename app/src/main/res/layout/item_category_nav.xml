@@ -3,41 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutCategoryNavRoot"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
+    android:paddingVertical="2dp"
     android:background="?attr/selectableItemBackground">
 
     <!-- Active Indicator Bar -->
     <View
         android:id="@+id/viewActiveIndicator"
         android:layout_width="6dp"
-        android:layout_marginVertical="10dp"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:background="@drawable/orange_button_bg"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Icon Container -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardCategoryIcon"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="#E1E2E6"
-        app:cardCornerRadius="13dp"
+        android:id="@+id/cardCategoryIconOuter"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:cardBackgroundColor="@color/primaryGreenColor"
+        app:cardCornerRadius="14dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/ivCategoryIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:contentDescription="Category Icon"
-            android:src="@drawable/ic_fashion_category1" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCategoryIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="#E5F4EE"
+            app:cardCornerRadius="12dp"
+            app:cardUseCompatPadding="false"
+            android:layout_margin="1.4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivCategoryIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:contentDescription="Category Icon"
+                android:src="@drawable/ic_fashion_category1" />
+        </androidx.cardview.widget.CardView>
+
     </androidx.cardview.widget.CardView>
 
     <!-- Category Label -->
@@ -46,16 +60,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
         android:text="Fashion"
-        android:textColor="#3F4245"
-        android:textSize="13sp"
+        android:textColor="@color/lighter_dark"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardCategoryIcon" />
+        app:layout_constraintTop_toBottomOf="@id/cardCategoryIconOuter" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="13dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

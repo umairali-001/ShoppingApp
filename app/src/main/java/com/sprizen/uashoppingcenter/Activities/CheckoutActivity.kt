@@ -273,79 +273,71 @@ class CheckoutActivity : AppCompatActivity() {
             return
         }
 
-        if (selectedPaymentMethod == "Credit / Debit Card") {
-            val cardNum = binding.etCardNumber.text.toString().replace(" ", "").trim()
-            val expiry = binding.etCardExpiry.text.toString().trim()
-            val cvv = binding.etCardCvv.text.toString().trim()
-
-            if (cardNum.length < 15) {
-                binding.etCardNumber.error = "Valid 16-digit card required"
-                binding.etCardNumber.requestFocus()
-                return
-            }
-            if (expiry.length < 4) {
-                binding.etCardExpiry.error = "Valid expiry required (MM/YY)"
-                binding.etCardExpiry.requestFocus()
-                return
-            }
-            if (cvv.length < 3) {
-                binding.etCardCvv.error = "3-digit CVV required"
-                binding.etCardCvv.requestFocus()
-                return
-            }
-        } else if (selectedPaymentMethod == "Mobile Wallet / UPI") {
-            val walletId = binding.etWalletId.text.toString().trim()
-            if (walletId.isEmpty()) {
-                binding.etWalletId.error = "Wallet ID / Mobile Number required"
-                binding.etWalletId.requestFocus()
-                return
-            }
-        }
-
         binding.loadingOverlay.visibility = View.VISIBLE
-        binding.tvLoadingStatus.text = if (selectedPaymentMethod == "Cash on Delivery") {
-            "Placing Order..."
+
+        val orderId = "ORD-" + UUID.randomUUID().toString().take(8).uppercase()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val userId = currentUser?.uid ?: "guest_${System.currentTimeMillis()}"
+        val userEmail = currentUser?.email ?: "guest@uashopping.com"
+
+        // اگر Cash on Delivery ہو تو براہ راست فائر بیس میں سیو کریں
+        if (selectedPaymentMethod == "Cash on Delivery") {
+            binding.tvLoadingStatus.text = "Placing COD Order..."
+            saveOrderToFirebase(orderId, userId, userEmail, fullName, phone, address, city, postal, "PENDING_COD")
         } else {
-            "Verifying Payment with Bank Gateway..."
+            // اگر JazzCash, Easypaisa, یا Card ہو
+            binding.tvLoadingStatus.text = "Opening Payment Gateway..."
+
+            // یہاں آپ کی جاز کیش / ایزی پیسہ / پے فاسٹ کا آن لائن پیمنٹ لنک آئے گا
+            val paymentGatewayUrl = "https://your-backend-api.com/pay?orderId=$orderId&amount=$totalPayable"
+
+            binding.loadingOverlay.visibility = View.GONE
+            openSecurePaymentBrowser(paymentGatewayUrl)
         }
+    }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val orderId = "ORD-" + UUID.randomUUID().toString().take(8).uppercase()
-            val currentUser = FirebaseAuth.getInstance().currentUser
-            val userId = currentUser?.uid ?: "guest_${System.currentTimeMillis()}"
-            val userEmail = currentUser?.email ?: "guest@uashopping.com"
+    private fun openSecurePaymentBrowser(gatewayUrl: String) {
+        try {
+            val builder = androidx.browser.customtabs.CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(this, android.net.Uri.parse(gatewayUrl))
+        } catch (e: Exception) {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(gatewayUrl))
+            startActivity(intent)
+        }
+    }
 
-            val order = Order(
-                orderId = orderId,
-                userId = userId,
-                userEmail = userEmail,
-                customerName = fullName,
-                customerPhone = phone,
-                shippingAddress = address,
-                city = city,
-                postalCode = postal,
-                items = orderItems,
-                totalAmount = totalPayable,
-                paymentMethod = selectedPaymentMethod,
-                paymentStatus = if (selectedPaymentMethod == "Cash on Delivery") "PENDING_COD" else "PAID",
-                orderStatus = "Processing",
-                timestamp = System.currentTimeMillis()
-            )
+    private fun saveOrderToFirebase(
+        orderId: String, userId: String, userEmail: String,
+        fullName: String, phone: String, address: String,
+        city: String, postal: String, paymentStatus: String
+    ) {
+        val order = Order(
+            orderId = orderId,
+            userId = userId,
+            userEmail = userEmail,
+            customerName = fullName,
+            customerPhone = phone,
+            shippingAddress = address,
+            city = city,
+            postalCode = postal,
+            items = orderItems,
+            totalAmount = totalPayable,
+            paymentMethod = selectedPaymentMethod,
+            paymentStatus = paymentStatus,
+            orderStatus = "Processing",
+            timestamp = System.currentTimeMillis()
+        )
 
-            val ordersRef = FirebaseDatabase.getInstance().getReference("orders")
-            ordersRef.child(orderId).setValue(order).addOnCompleteListener { task ->
-                binding.loadingOverlay.visibility = View.GONE
-                if (task.isSuccessful) {
-                    showSuccessDialog(order)
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Failed to save order: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+        val ordersRef = FirebaseDatabase.getInstance().getReference("orders")
+        ordersRef.child(orderId).setValue(order).addOnCompleteListener { task ->
+            binding.loadingOverlay.visibility = View.GONE
+            if (task.isSuccessful) {
+                showSuccessDialog(order)
+            } else {
+                Toast.makeText(this, "Failed to save order: ${task.exception?.message}", Toast.LENGTH_LONG).show()
             }
-        }, 1800)
+        }
     }
 
     private fun showSuccessDialog(order: Order) {

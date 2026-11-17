@@ -1,15 +1,23 @@
 package com.sprizen.uashoppingcenter.Activities
 
+import android.R.attr.background
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -418,6 +426,10 @@ class AddProductActivity : AppCompatActivity() {
 
                 uploadProduct()
             }
+        }
+
+        binding.btnSelectColorDialog.setOnClickListener {
+            setupColorVariantPicker()
         }
     }
 
@@ -1694,5 +1706,133 @@ class AddProductActivity : AppCompatActivity() {
 
 
         return tempFile
+    }
+
+    // 1. Data Class for Colors
+    data class ProductColor(val name: String, val hexCode: String)
+
+    private val presetColors = listOf(
+        ProductColor("Black", "#000000"),
+        ProductColor("Blue", "#215B95"),
+        ProductColor("White", "#FFFFFF"),
+        ProductColor("Red", "#EF4444"),
+        ProductColor("Green", "#10B981"),
+        ProductColor("Yellow", "#F59E0B"),
+        ProductColor("Orange", "#F97316"),
+        ProductColor("Purple", "#8B5CF6"),
+        ProductColor("Pink", "#EC4899"),
+        ProductColor("Grey", "#64748B")
+    )
+
+    private val selectedColorsList = ArrayList<ProductColor>()
+    private lateinit var colorAdapter: SelectedColorsAdapter
+
+    // RecyclerView setup inside initializeEverything or onCreate
+    private fun setupColorVariantPicker() {
+        // RecyclerView Initialize
+        colorAdapter = SelectedColorsAdapter(selectedColorsList) { position ->
+            // Delete action when item is clicked/removed
+            selectedColorsList.removeAt(position)
+            colorAdapter.notifyItemRemoved(position)
+        }
+
+        binding.rvSelectedColors.layoutManager = LinearLayoutManager(this) // Or LinearLayoutManager
+        binding.rvSelectedColors.layoutManager = LinearLayoutManager(this)
+        binding.rvSelectedColors.adapter = colorAdapter
+
+        // Button click to open BottomSheetDialog with 10 preset colors
+        binding.btnSelectColorDialog.setOnClickListener {
+            showColorSelectionDialog()
+        }
+    }
+
+    private fun showColorSelectionDialog() {
+        val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
+
+        val listView = android.widget.ListView(this).apply {
+            setPadding(0, 24, 0, 24)
+            divider = null
+        }
+
+        val adapter = object : ArrayAdapter<ProductColor>(
+            this,
+            R.layout.item_color_picker,
+            presetColors
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = convertView ?: layoutInflater.inflate(R.layout.item_color_picker, parent, false)
+                val colorItem = getItem(position)
+
+                val tvColorName = view.findViewById<TextView>(R.id.tvColorName)
+                val viewColorCircle = view.findViewById<View>(R.id.viewColorCircle)
+                var imageView = view.findViewById<ImageView>(R.id.arrowImage)
+                imageView.rotation=90f
+
+                tvColorName?.text = colorItem?.name
+                try {
+                    if (colorItem != null) {
+                        viewColorCircle?.setBackgroundColor(android.graphics.Color.parseColor(colorItem.hexCode))
+                    }
+                } catch (e: Exception) {
+                    viewColorCircle?.setBackgroundColor(android.graphics.Color.BLACK)
+                }
+
+                return view
+            }
+        }
+
+        listView.adapter = adapter
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selected = presetColors[position]
+            // Check if already added
+            if (!selectedColorsList.any { it.name == selected.name }) {
+                selectedColorsList.add(selected)
+                colorAdapter.notifyItemInserted(selectedColorsList.size - 1)
+            } else {
+                Toast.makeText(this, "${selected.name} is already added", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(listView)
+        dialog.show()
+    }
+
+    // ============================================================
+    // INNER RECYCLER VIEW ADAPTER CLASS
+    // ============================================================
+    inner class SelectedColorsAdapter(
+        private val colorsList: ArrayList<ProductColor>,
+        private val onDeleteClick: (Int) -> Unit
+    ) : RecyclerView.Adapter<SelectedColorsAdapter.ColorViewHolder>() {
+
+        inner class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val tvColorName: TextView = itemView.findViewById(R.id.tvColorName)
+            val viewColorCircle: View = itemView.findViewById(R.id.viewColorCircle)
+            // Agar right side par arrow ki jagah delete icon lagana ho ya click handle karna ho:
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_color_picker, parent, false)
+            return ColorViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
+            val colorItem = colorsList[position]
+            holder.tvColorName.text = colorItem.name
+
+            try {
+                holder.viewColorCircle.setBackgroundColor(android.graphics.Color.parseColor(colorItem.hexCode))
+            } catch (e: Exception) {
+                holder.viewColorCircle.setBackgroundColor(android.graphics.Color.BLACK)
+            }
+
+            // Item par click karne se delete ho jaye ya remove ho jaye
+            holder.itemView.setOnClickListener {
+                onDeleteClick(holder.adapterPosition)
+            }
+        }
+
+        override fun getItemCount(): Int = colorsList.size
     }
 }

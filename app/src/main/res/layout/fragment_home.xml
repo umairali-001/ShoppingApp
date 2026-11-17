@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     xmlns:tools1="http://schemas.android.com/tools"
     android:id="@+id/tabLayout1"
-    android:background="#F9FAFB"
+    android:background="@color/primary_screen_background"
     tools:context=".Fragments.HomeFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_marginHorizontal="10dp"
-        android:background="#F9FAFB"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/primary_screen_background"
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,10 +26,11 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
-                android:background="@drawable/bg_search"
+
                 android:id="@+id/btn_notification"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/bg_search"
                 android:padding="10dp"
                 android:src="@drawable/ic_notification"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,12 +38,12 @@
                 app:tint="@color/lighter_dark" />
 
             <TextView
-                android:layout_marginBottom="5dp"
                 android:id="@+id/tv_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ShopUp"
+                android:layout_marginBottom="5dp"
                 android:letterSpacing="0.08"
+                android:text="ShopUp"
                 android:textColor="@color/primaryGreenColor"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -51,11 +52,11 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
-                android:background="@drawable/bg_search"
                 android:id="@+id/btn_search"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_search"
                 android:padding="10dp"
                 android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,10 +64,10 @@
                 app:tint="@color/lighter_dark" />
 
             <FrameLayout
-                android:background="@drawable/bg_search"
                 android:id="@+id/cart_container"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/bg_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -121,11 +122,17 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_arrow_down" />
+                android:id="@+id/address_dropdown_arrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:rotation="0"
+                android:src="@drawable/ic_edit_location"
+                app:tint="@color/price_orange" />
         </LinearLayout>
+
+
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -148,9 +155,9 @@
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager"
-                    android:paddingHorizontal="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp" />
 
                 <LinearLayout
                     android:id="@+id/dotsContainer"
@@ -415,21 +422,19 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                tools1:listitem="@layout/item_adapter"
-                android:layout_marginHorizontal="6dp"
+                tools1:listitem="@layout/flash_deal_adapter"
+                android:layout_marginHorizontal="10dp"
                 android:id="@+id/rv_flash_deals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:orientation="horizontal" />
 
             <RelativeLayout
                 android:layout_marginHorizontal="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -452,11 +457,11 @@
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginHorizontal="6dp"
+                android:layout_marginHorizontal="8dp"
                 android:id="@+id/item_show_home_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:paddingBottom="80dp"
                 android:nestedScrollingEnabled="false" />
 

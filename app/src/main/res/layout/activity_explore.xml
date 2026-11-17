@@ -39,11 +39,12 @@
                 app:tint="#4B5159" />
 
             <EditText
+                android:imeOptions="actionSearch"
                 android:id="@+id/searchBar"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
-                android:background="@drawable/bg_search"
+                android:background="@drawable/bg_search_input"
                 android:hint="Search for Products and Category"
                 android:inputType="text"
                 android:maxLines="1"
@@ -70,6 +71,7 @@
                 app:tint="#9D9EA0" />
 
             <Button
+                android:visibility="gone"
                 android:id="@+id/search_btn"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"

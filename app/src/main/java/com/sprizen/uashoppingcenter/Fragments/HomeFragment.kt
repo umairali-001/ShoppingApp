@@ -17,12 +17,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sprizen.uashoppingcenter.Activities.ExploreActivity
+import com.sprizen.uashoppingcenter.Adapters.AdapterFlashDeal
 import com.sprizen.uashoppingcenter.Adapters.AdapterItem
 import com.sprizen.uashoppingcenter.Adapters.SliderAdapter
 import com.sprizen.uashoppingcenter.DATA_CLASS.PRODUCT
@@ -35,6 +37,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
     lateinit var adapterItem: AdapterItem
 
     lateinit var binding: FragmentHomeBinding
+
+    lateinit var adapterFlashDeal: AdapterFlashDeal
 
     // ==========================================
     // SLIDER
@@ -94,31 +98,36 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
         // ==========================================
 
         adapterItem = AdapterItem(requireContext(), itemList,this@HomeFragment)
+        adapterFlashDeal = AdapterFlashDeal(requireContext(),itemList, this@HomeFragment)
+
 
 
         // ==========================================
-        // RECYCLER VIEW
+        // RECYCLER VIEWS
         // ==========================================
-
         var recyclerView = binding.itemShowHomeRecyclerView
-
-
         recyclerView.adapter = adapterItem
-
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-
-
         recyclerView.setHasFixedSize(true)
-
         recyclerView.setItemViewCacheSize(20)
 
+
+
+        // ==========================================
+        // 2. Flash Deals RecyclerView Setup (Horizontal)
+        // ==========================================
+
+        val rvFlashDeals = binding.rvFlashDeals
+        rvFlashDeals.adapter = adapterFlashDeal
+        rvFlashDeals.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvFlashDeals.setHasFixedSize(true)
+        rvFlashDeals.setItemViewCacheSize(20)
 
         // ==========================================
         // GET FIREBASE DATA
         // ==========================================
 
         getProductsFromFirebase()
-
         setupSlider()
         setupDots()
         clickListeners()
@@ -156,6 +165,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
             binding.btnNotification.postDelayed({ binding.btnNotification.background=null },50)
             binding.btnNotification.setBackgroundResource(R.drawable.bg_search)
         }
+        binding.addressDropdownArrow.setOnClickListener {
+
+        }
 
 
     }
@@ -163,42 +175,32 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
 
 
     fun getProductsFromFirebase() {
-
-        var database = FirebaseDatabase.getInstance().getReference("products")
+        val database = FirebaseDatabase.getInstance().getReference("products")
 
         database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                itemList.clear()
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    itemList.clear()
-
-                    for (child in snapshot.children) {
-
-                        var product = child.getValue(PRODUCT::class.java)
-                        if (product != null) {
-
-                            // Firebase key
-                            if (product.productId.isEmpty()) {
-
-                                product.productId =
-                                    child.key ?: ""
-                            }
-
-
-                            itemList.add(product)
+                for (child in snapshot.children) {
+                    val product = child.getValue(PRODUCT::class.java)
+                    if (product != null) {
+                        // Firebase key
+                        if (product.productId.isEmpty()) {
+                            product.productId = child.key ?: ""
                         }
+                        itemList.add(product)
                     }
-
-
-                    adapterItem.notifyDataSetChanged()
                 }
 
-
-                override fun onCancelled(error: DatabaseError) {
-
-                    Toast.makeText(requireContext(), "Firebase Error: ${error.message}", Toast.LENGTH_LONG).show()
-                }
+                // Dono adapters ko notify karein
+                adapterItem.notifyDataSetChanged()
+                adapterFlashDeal.notifyDataSetChanged() // <-- Yeh line zaroori hai
             }
-        )
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Firebase Error: ${error.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
 
@@ -463,8 +465,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
         root.addView(flyingImage, params)
 
         flyingImage.animate()
-            .translationX((targetX - startX).toFloat())
-            .translationY((targetY - startY).toFloat())
+            .translationX((targetX - startX).toFloat()) // <-- '-' sign add kiya gaya hai
+            .translationY((targetY - startY).toFloat()) // <-- '-' sign add kiya gaya hai
             .scaleX(0.1f)
             .scaleY(0.1f)
             .setDuration(600)
@@ -472,7 +474,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
                 AccelerateDecelerateInterpolator()
             )
             .withEndAction {
-
                 root.removeView(flyingImage)
 
                 cartIcon.animate()
@@ -480,7 +481,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterItem.OnButtonClick
                     .scaleY(1.25f)
                     .setDuration(120)
                     .withEndAction {
-
                         cartIcon.animate()
                             .scaleX(1f)
                             .scaleY(1f)

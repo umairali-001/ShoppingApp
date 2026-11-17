@@ -46,7 +46,7 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
-        
+
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_adapter, parent, false))
     }
 
@@ -82,7 +82,7 @@ class AdapterItem(context: Context, itemList: MutableList<PRODUCT>, var listener
         binding.listingPrice.text = "Rs:${product.productPriceActual}"
 
         // Rating
-        binding.itemRatting.text = "★ ${product.rating}"
+        binding.itemRatting.text = "${product.rating} ★★★★★"
 
         // Description
         binding.itemDes.text = product.productDescription

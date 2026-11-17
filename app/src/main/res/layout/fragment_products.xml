@@ -1,194 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F8FAFC"
     android:fitsSystemWindows="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SellerFragments.ProductsFragment">
 
+    <!-- Header Layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="1dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Back"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/layoutHeader"
-            android:layout_width="match_parent"
+            app:tint="#0C1F3D" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="12dp">
+            android:text="My Products"
+            android:textColor="#0C1F3D"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Back"
-                android:src="@drawable/ic_arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#0C1F3D" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Products"
-                android:textColor="#0C1F3D"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btnQuickAdd"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:cardBackgroundColor="#DEDEDE"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:padding="3dp"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_pluse"
-                    app:tint="@color/primaryGreenColor" />
-            </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search_input"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="14dp"
-            app:layout_constraintTop_toBottomOf="@id/layoutHeader">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnQuickAdd"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:cardBackgroundColor="#F1F5F9"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_search"
-                app:tint="#A0AEC0" />
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pluse"
+                app:tint="@color/primaryGreenColor" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:background="@null"
-                android:hint="Search products"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:textColor="#0C1F3D"
-                android:textColorHint="#A0AEC0"
-                android:textSize="14sp" />
-        </LinearLayout>
+    <!-- Search Input -->
+    <LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_search_input"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
 
-        <HorizontalScrollView
-            android:id="@+id/tabScroll"
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_search"
+            app:tint="#A0AEC0" />
+
+        <EditText
+            android:id="@+id/etSearchProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/layoutSearch">
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="Search products..."
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="#0C1F3D"
+            android:textColorHint="#A0AEC0"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-            <LinearLayout
+    <!-- Tab Scroll Filter -->
+    <HorizontalScrollView
+        android:id="@+id/tabScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/tvTabAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="12dp">
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="All (0)"
+                android:textColor="@color/primaryGreenColor"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingEnd="16dp">
+            <TextView
+                android:id="@+id/tvTabActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="In Stock (0)"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="All (18)"
-                        android:textColor="@color/primaryGreenColor"
-                        android:textSize="13.5sp"
-                        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvTabOutOfStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="Out of Stock (0)"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
-                    <View
-                        android:layout_width="28dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/primaryGreenColor" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:text="Active (14)"
-                    android:textColor="#64748B"
-                    android:textSize="13.5sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:text="Inactive (2)"
-                    android:textColor="#64748B"
-                    android:textSize="13.5sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:text="Out of Stock (2)"
-                    android:textColor="#64748B"
-                    android:textSize="13.5sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </HorizontalScrollView>
-
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="12dp"
         android:paddingTop="8dp"
         android:paddingBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="@id/btnAddNewProduct"
+        app:layout_constraintBottom_toTopOf="@id/btnAddNewProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabScroll"
-        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/seller_product_adapter" />
 
-    <Button
-            android:background="@drawable/orange_button_bg"
-            android:id="@+id/btnAddNewProduct"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="66dp"
-            android:text="+ Add New Product"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btnAddNewProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabScroll">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_products"
+            app:tint="#CBD5E1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="No products found"
+            android:textColor="#64748B"
             android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:textStyle="bold" />
+    </LinearLayout>
 
-
+    <!-- Add Button -->
+    <Button
+        android:id="@+id/btnAddNewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/orange_button_bg"
+        android:text="+ Add New Product"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

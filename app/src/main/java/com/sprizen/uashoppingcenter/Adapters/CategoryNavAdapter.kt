@@ -38,13 +38,15 @@ class CategoryNavAdapter(
         holder.ivIcon.setImageResource(item.iconRes)
 
         if (isSelected) {
-            holder.cardIcon.setCardBackgroundColor(Color.parseColor("#55AD8E"))
-            holder.tvLabel.setTextColor(Color.parseColor("#00A669"))
+            holder.cardIcon.setCardBackgroundColor(Color.parseColor("#E5F4EE"))
+            holder.cardIconOuter.setCardBackgroundColor(Color.parseColor("#339070"))
+            holder.tvLabel.setTextColor(Color.parseColor("#339070"))
             holder.tvLabel.setTypeface(null, android.graphics.Typeface.BOLD)
             holder.activeIndicator.visibility = View.VISIBLE
         } else {
-            holder.cardIcon.setCardBackgroundColor(Color.parseColor("#E1E2E6"))
-            holder.tvLabel.setTextColor(Color.parseColor("#64748B"))
+            holder.cardIcon.setCardBackgroundColor(Color.parseColor("#EDEDED"))
+            holder.cardIconOuter.setCardBackgroundColor(Color.parseColor("#EDEDED"))
+            holder.tvLabel.setTextColor(Color.parseColor("#555556"))
             holder.tvLabel.setTypeface(null, android.graphics.Typeface.NORMAL)
             holder.activeIndicator.visibility = View.GONE
         }
@@ -63,6 +65,7 @@ class CategoryNavAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val activeIndicator: View = itemView.findViewById(R.id.viewActiveIndicator)
         val cardIcon: CardView = itemView.findViewById(R.id.cardCategoryIcon)
+        val cardIconOuter: CardView = itemView.findViewById(R.id.cardCategoryIconOuter)
         val ivIcon: ImageView = itemView.findViewById(R.id.ivCategoryIcon)
         val tvLabel: TextView = itemView.findViewById(R.id.tvCategoryLabel)
     }

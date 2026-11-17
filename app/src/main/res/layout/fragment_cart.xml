@@ -26,18 +26,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#F9FAFB"
-            app:elevation="0dp">
+            app:elevation="4dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_marginHorizontal="16dp"
                 android:layout_width="match_parent"
                 android:id="@+id/title_card"
+                android:layout_marginBottom="6dp"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="noScroll">
 
 
                 <ImageView
+                    android:background="@drawable/bg_search"
                     android:id="@+id/back_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -56,7 +58,6 @@
                     android:text="My Cart"
                     android:textColor="@color/primaryGreenColor"
                     android:textSize="22sp"
-                    android:letterSpacing="0.08"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -69,6 +70,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="10dp"
+                    android:background="@drawable/bg_search"
                     android:src="@drawable/ic_wishlist"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -77,11 +79,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#12000000"
-                app:layout_scrollFlags="scroll|enterAlways"/>
 
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -93,18 +90,59 @@
             android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:paddingTop="6dp"
-                android:id="@+id/rv_cart_recyclerView"
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="250dp"
-                android:paddingBottom="150dp"
-                android:paddingHorizontal="5dp"
-                android:nestedScrollingEnabled="false"
-                tools1:listitem="@layout/cart_adapter" />
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:paddingTop="6dp"
+                    android:visibility="visible"
+                    android:id="@+id/rv_cart_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="150dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:nestedScrollingEnabled="false"
+                    tools1:listitem="@layout/cart_adapter" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layoutEmptyCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_cart"
+                        app:tint="#94A3B8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="No Cart Recorded Yet"
+                        android:textColor="#0F172A"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Cart any Products and products will appear here."
+                        android:textColor="#64748B"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
 
 
         </androidx.core.widget.NestedScrollView>
@@ -113,16 +151,11 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#0D000000"
-        app:layout_constraintBottom_toTopOf="@id/paymentcard1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <LinearLayout
+        android:elevation="18dp"
+       android:background="@drawable/bg_search"
         android:layout_marginBottom="40dp"
         android:id="@+id/paymentcard1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,41 +168,49 @@
         <LinearLayout
             android:id="@+id/paymentcard"
             android:visibility="visible"
-            android:paddingBottom="4dp"
-            android:elevation="2dp"
-            android:paddingVertical="8dp"
-            android:layout_marginHorizontal="13dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="3dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="1dp"
-            android:backgroundTint="@color/white"
-            android:background="@drawable/orange_button_bg"
+            android:backgroundTint="#F9FAFB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="12dp">
 
 
-            <RelativeLayout
-                style="@style/PriceDetailRow">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
 
                 <TextView
                     android:id="@+id/total_Price_and_item_cout_text"
-                    style="@style/PriceDetailLabel"
-                    android:text="Total Price (0 items)" />
-
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Total Price (0 items)"
+                    android:textColor="@color/lighter_dark"
+                    android:textSize="14.5sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:textColor="#474747"
-                    android:textSize="14sp"
                     android:id="@+id/total_price_tv"
-                    style="@style/PriceDetailValue"
-                    android:text="Rs: 0.0" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs. 0.0"
+                    android:textColor="@color/lighter_dark"
+                    android:textSize="14.5sp"
+                    android:textStyle="bold" />
 
-
-            </RelativeLayout>
+            </LinearLayout>
 
 
             <RelativeLayout
+                android:visibility="gone"
                 style="@style/PriceDetailRow">
 
 
@@ -188,42 +229,45 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                style="@style/PriceDetailRow">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
 
-
+                <!-- Left Side: Label & Info Icon Group -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
 
                     <TextView
                         style="@style/PriceDetailLabel"
                         android:text="Delivery Charges" />
 
-
                     <ImageView
-                        android:layout_width="11dp"
-                        android:layout_height="14dp"
+                        android:layout_width="15dp"
+                        android:layout_height="17dp"
                         android:layout_marginStart="4dp"
-                        android:src="@drawable/ic_payment_slid"
-                        app:tint="#666666" />
-
+                        android:src="@drawable/ic_cash_on_delevery" />
 
                 </LinearLayout>
 
-
+                <!-- Right Side: Price Value -->
                 <TextView
                     android:id="@+id/delivery_charges"
                     style="@style/PriceDetailValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textColor="#00A36C"
                     android:textStyle="bold" />
 
-
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -231,7 +275,7 @@
 
         <Button
             android:id="@+id/btnBuyPruductCart"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:textStyle="bold"
             android:textSize="16dp"
             android:textAllCaps="false"

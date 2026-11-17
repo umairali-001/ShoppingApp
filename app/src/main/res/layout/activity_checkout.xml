@@ -434,16 +434,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="1dp">
+                app:cardBackgroundColor="@color/primary_screen_background"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:id="@+id/layoutOrderItemsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="14dp" />
+                    android:orientation="vertical"/>
             </androidx.cardview.widget.CardView>
 
             <!-- SECTION 4: Price Breakdown -->

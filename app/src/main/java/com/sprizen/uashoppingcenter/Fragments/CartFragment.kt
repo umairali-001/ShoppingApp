@@ -49,12 +49,12 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
 
     fun initializeEveryThing() {
         dataBase = DataBase(requireContext())
-
         setupRecyclerView()
         setupClickListeners()
     }
 
     private fun setupRecyclerView() {
+
         itemCartAdapter = ItemCartAdapter(
             requireContext(),
             itemList,
@@ -66,9 +66,12 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemCartAdapter
         }
+
     }
 
     private fun setupClickListeners() {
+
+
         binding.btnBuyPruductCart.setOnClickListener {
             if (itemList.isEmpty()) {
                 Toast.makeText(requireContext(), "Your cart is empty!", Toast.LENGTH_SHORT).show()
@@ -90,6 +93,7 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
             }
             startActivity(intent)
         }
+
     }
 
     private fun loadCartData() {
@@ -105,6 +109,8 @@ class CartFragment : Fragment(), ItemCartAdapter.OnProductCheckedListener {
 
         productIds.clear()
         // Unique IDs filter kar rahe hain taake cart mein duplicates na hon
+
+
         val uniqueCartIds = cartProductList.map { it.productId }.distinct()
         productIds.addAll(uniqueCartIds)
 

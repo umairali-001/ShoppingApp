@@ -6,189 +6,166 @@ import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.content.contentValuesOf
 import com.sprizen.uashoppingcenter.DATA_CLASS.CartSQ
 import com.sprizen.uashoppingcenter.DATA_CLASS.PHOTO
+import com.sprizen.uashoppingcenter.DATA_CLASS.SEARCH
 
-class DataBase(context: Context) : SQLiteOpenHelper(context, "IMAGES.DB", null, 1) {
+class DataBase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    var context: Context
-
-    init {
-        this.context = context
-
-        writableDatabase.execSQL("CREATE TABLE IF NOT EXISTS PHOTO(PHOTO_ID INTEGER PRIMARY KEY AUTOINCREMENT, PHOTO_LINK TEXT, PHOTO_NAME TEXT, CATEGORY TEXT )")
-        writableDatabase.execSQL(
-            "CREATE TABLE IF NOT EXISTS PRODUCT(PRODUCT_ID INTEGER PRIMARY " +
-                    "KEY AUTOINCREMENT, PRODUCT_FB_ID TEXT, IN_STOKE TEXT)"
-        )
-        writableDatabase.execSQL(
-            "CREATE TABLE IF NOT EXISTS SEARCHES(SEARCH_ID INTEGER PRIMARY " +
-                    "KEY AUTOINCREMENT, SEARCH TEXT, IS_DELETED TEXT)"
-        )
+    companion object {
+        private const val DATABASE_NAME = "IMAGES.DB"
+        private const val DATABASE_VERSION = 1
     }
 
+    override fun onCreate(db: SQLiteDatabase?) {
+        db?.execSQL("CREATE TABLE IF NOT EXISTS PHOTO (PHOTO_ID INTEGER PRIMARY KEY AUTOINCREMENT, PHOTO_LINK TEXT, PHOTO_NAME TEXT, CATEGORY TEXT)")
+        db?.execSQL("CREATE TABLE IF NOT EXISTS PRODUCT (PRODUCT_ID INTEGER PRIMARY KEY AUTOINCREMENT, PRODUCT_FB_ID TEXT, IN_STOKE TEXT)")
+        db?.execSQL("CREATE TABLE IF NOT EXISTS SEARCHES (SEARCH_ID INTEGER PRIMARY KEY AUTOINCREMENT, SEARCH TEXT, IS_DELETED TEXT)")
+    }
 
-
-
-
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS PHOTO")
+        db?.execSQL("DROP TABLE IF EXISTS PRODUCT")
+        db?.execSQL("DROP TABLE IF EXISTS SEARCHES")
+        onCreate(db)
+    }
 
     //=====================================================================================
     //              FOR IMAGE LOADING FOR CATEGORY SECTION
     //======================================================================================
 
     fun insert_information(photoLink: String, photoName: String, category: String): String {
-        var contentValue = contentValuesOf()
-        contentValue.put("PHOTO_LINK", photoLink)
-        contentValue.put("PHOTO_NAME", photoName)
-        contentValue.put("CATEGORY", category)
-        var result = writableDatabase.insert("PHOTO", null, contentValue)
-
-        if (result == -1L) {
-            return "Error"
-        } else {
-            return "Succes"
+        val contentValue = contentValuesOf().apply {
+            put("PHOTO_LINK", photoLink)
+            put("PHOTO_NAME", photoName)
+            put("CATEGORY", category)
         }
+        val result = writableDatabase.insert("PHOTO", null, contentValue)
+        return if (result == -1L) "Error" else "Success"
     }
 
     fun getData(category: String): MutableList<PHOTO> {
-        var photoList = mutableListOf<PHOTO>()
+        val photoList = mutableListOf<PHOTO>()
 
-        val cursor = writableDatabase.rawQuery(
+        writableDatabase.rawQuery(
             "SELECT * FROM PHOTO WHERE CATEGORY = ?",
             arrayOf(category)
-        )
+        ).use { cursor ->
+            while (cursor.moveToNext()) {
+                val photoId = cursor.getInt(0)
+                val photoLink = cursor.getString(1)
+                val photoName = cursor.getString(2)
+                val photoCategory = cursor.getString(3)
 
-        while (cursor.moveToNext()) {
-            var photoId = cursor.getInt(0)
-            var photoLink = cursor.getString(1)
-            var photoName = cursor.getString(2)
-            var photoCategory = cursor.getString(3)
-
-            var sigle_Info = PHOTO(photoId.toString(), photoLink, photoName, photoCategory)
-            photoList.add(sigle_Info)
+                photoList.add(PHOTO(photoId.toString(), photoLink, photoName, photoCategory))
+            }
         }
         return photoList
-
     }
 
     //=====================================================================================
-    //              FOR CARTED PRODUCTS IN CART SECTION SECTION
+    //              FOR CARTED PRODUCTS IN CART SECTION
     //======================================================================================
+
     fun insertCartProduct(productId: String): String {
-
-        var contentValue = contentValuesOf()
-
-        contentValue.put("PRODUCT_FB_ID", productId)
-        contentValue.put("IN_STOKE", "TURE")
-
-        var result = writableDatabase.insert("PRODUCT", null, contentValue)
-
-        if (result == -1L) {
-            return "Error"
-        } else {
-            return "Succes"
+        val contentValue = contentValuesOf().apply {
+            put("PRODUCT_FB_ID", productId)
+            put("IN_STOKE", "TRUE")
         }
+
+        val result = writableDatabase.insert("PRODUCT", null, contentValue)
+        return if (result == -1L) "Error" else "Success"
     }
 
     fun getCatProduct(): MutableList<CartSQ> {
-        var productList = mutableListOf<CartSQ>()
+        val productList = mutableListOf<CartSQ>()
 
-        val cursor = writableDatabase.rawQuery(
-            "SELECT * FROM PRODUCT WHERE IN_STOKE = 'TURE'", null
-        )
+        writableDatabase.rawQuery(
+            "SELECT * FROM PRODUCT WHERE IN_STOKE = 'TRUE'", null
+        ).use { cursor ->
+            while (cursor.moveToNext()) {
+                val autId = cursor.getInt(0)
+                val productId = cursor.getString(1)
+                val inStoke = cursor.getString(2)
 
-        while (cursor.moveToNext()) {
-
-            var autId = cursor.getInt(0)
-            var productId = cursor.getString(1)
-            var inStoke = cursor.getString(2)
-
-
-            var sigle_Info = CartSQ(autId.toString(), productId.toString(), inStoke.toString())
-            productList.add(sigle_Info)
+                productList.add(CartSQ(autId.toString(), productId, inStoke))
+            }
         }
         return productList
-
     }
 
-    fun getLastAddedProduct(): CartSQ {
-        val cursor = writableDatabase.rawQuery("SELECT * FROM PRODUCT WHERE IN_STOKE = 'TURE'",null)
-        cursor.moveToPosition(cursor.count - 1)
-        var autId = cursor.getInt(0)
-        var productId = cursor.getString(1)
-        var inStoke = cursor.getString(2)
-
-        var lastCartProduct = CartSQ(autId.toString(), productId.toString(), inStoke.toString())
-
-        return lastCartProduct
-
+    fun getLastAddedProduct(): CartSQ? {
+        writableDatabase.rawQuery("SELECT * FROM PRODUCT WHERE IN_STOKE = 'TRUE'", null).use { cursor ->
+            if (cursor.moveToLast()) {
+                val autId = cursor.getInt(0)
+                val productId = cursor.getString(1)
+                val inStoke = cursor.getString(2)
+                return CartSQ(autId.toString(), productId, inStoke)
+            }
+        }
+        return null
     }
 
     fun deleteProduct(id: String): String {
-        var contentValues = contentValuesOf()
-        contentValues.put("IN_STOKE", "FALSE") // or "1", depending on how you want to store it
+        val contentValues = contentValuesOf().apply {
+            put("IN_STOKE", "FALSE")
+        }
 
         val noOfUpdatedRecord = writableDatabase.update(
-            "PRODUCT", contentValues, "PRODUCT_FB_ID=?", arrayOf(id.toString())
+            "PRODUCT", contentValues, "PRODUCT_FB_ID=?", arrayOf(id)
         )
         return if (noOfUpdatedRecord > 0) "Deleted Success" else "Error"
     }
 
-
-
-
-
-
-
-
-
-
     //=====================================================================================
-    //              FOR RESENT SEARCHES FOR SEARCH SECTION
+    //              FOR RECENT SEARCHES FOR SEARCH SECTION
     //======================================================================================
 
     fun insertResentSearch(search: String): String {
-
-        var contentValue = contentValuesOf()
-
-        contentValue.put("SEARCH", search)
-        contentValue.put("IS_DELETED", "FALSE")
-
-        var result = writableDatabase.insert("SEARCHES", null, contentValue)
-
-        if (result == -1L) {
-            return "Error"
-        } else {
-            return "Succes"
+        val contentValue = contentValuesOf().apply {
+            put("SEARCH", search)
+            put("IS_DELETED", "FALSE")
         }
+
+        val result = writableDatabase.insert("SEARCHES", null, contentValue)
+        return if (result == -1L) "Error" else "Success"
     }
-    fun getRecentSearches(): MutableList<String> {
-        var photoList = mutableListOf<String>()
 
-        var cursor = writableDatabase.rawQuery("SELECT * FROM SEARCHES",
-            null)
+    fun getRecentSearches(): MutableList<SEARCH> {
+        val searchList = mutableListOf<SEARCH>()
 
-        while (cursor.moveToNext()) {
-            var search = cursor.getString(1)
+        writableDatabase.rawQuery(
+            "SELECT * FROM SEARCHES WHERE IS_DELETED = 'FALSE'",
+            null
+        ).use { cursor ->
+            while (cursor.moveToNext()) {
+                val searchId = cursor.getInt(0)
+                val search = cursor.getString(1)
 
-            photoList.add(search)
-
+                searchList.add(SEARCH(searchId.toString(), search))
+            }
         }
-        return photoList
+
+        return searchList.reversed().toMutableList()
     }
 
-
-
-
-
-    override fun onCreate(p0: SQLiteDatabase?) {
-
-
+    // Single item soft delete
+    fun deleteSearches(id: Int): String {
+        val contentValues = contentValuesOf().apply {
+            put("IS_DELETED", "TRUE")
+        }
+        val noOfUpdatedRecord = writableDatabase.update(
+            "SEARCHES", contentValues, "SEARCH_ID=?", arrayOf(id.toString())
+        )
+        return if (noOfUpdatedRecord > 0) "Deleted Success" else "Error"
     }
 
-    override fun onUpgrade(
-        p0: SQLiteDatabase?,
-        p1: Int,
-        p2: Int,
-    ) {
-        TODO("Not yet implemented")
+    // Clear All soft delete (Saari active searches ko aik sath TRUE kar dega)
+    fun deleteAllSearches(): String {
+        val contentValues = contentValuesOf().apply {
+            put("IS_DELETED", "TRUE")
+        }
+        val noOfUpdatedRecord = writableDatabase.update(
+            "SEARCHES", contentValues, "IS_DELETED = ?", arrayOf("FALSE")
+        )
+        return if (noOfUpdatedRecord > 0) "Deleted Success" else "Error"
     }
 }

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9FAFB"
@@ -42,7 +43,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="50dp"
+                    android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:paddingHorizontal="10dp">
 
@@ -113,11 +114,11 @@
             <!-- ==================== PRODUCT IMAGES ==================== -->
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="-62dp"
+                android:layout_marginTop="-55dp"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="320dp"
                 app:cardBackgroundColor="#F7F8FA"
-                app:cardCornerRadius="0dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -135,16 +136,10 @@
 
             <!-- ==================== PRODUCT DETAILS ==================== -->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="-40dp"
-                android:outlineProvider="background"
-                android:outlineSpotShadowColor="@color/black">
 
                 <LinearLayout
+                    android:background="@color/primary_screen_background"
+                    android:outlineProvider="background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -153,18 +148,7 @@
 
                     <!-- ==================== CATEGORY ==================== -->
 
-                    <TextView
-                        android:layout_marginTop="1dp"
-                        android:id="@+id/tvCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_recent_search"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        android:text="Best Seller"
-                        android:textColor="@color/primaryGreenColor"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+
 
 
                     <!-- ==================== TITLE ==================== -->
@@ -327,7 +311,8 @@
                         app:cardElevation="0dp">
 
                         <LinearLayout
-                            android:background="@drawable/input_bg_outline"
+                            android:backgroundTint="@color/white"
+                            android:background="@drawable/item_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -436,15 +421,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="9.5dp"
+                        app:cardBackgroundColor="@color/white"
                         app:cardElevation="0dp">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/colorsRecyclerView"
+                            android:backgroundTint="@color/white"
+                            android:background="@drawable/item_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/input_bg_outline"
                             android:clipToPadding="false"
                             android:overScrollMode="never"
                             android:padding="10dp"
@@ -470,11 +456,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor="#F7F8FA"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 
                         <LinearLayout
+                            android:backgroundTint="@color/white"
+                            android:background="@drawable/item_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -512,7 +500,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
 
@@ -535,7 +523,7 @@
 
 
     <LinearLayout
-        android:backgroundTint="#0A339070"
+        android:backgroundTint="@color/white"
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -557,7 +545,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_weight="0.93"
             android:background="@drawable/bg_outline_button"
             android:gravity="center"
             android:orientation="horizontal">

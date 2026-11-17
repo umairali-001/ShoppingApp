@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp">
+
+        <!-- Product Image Container -->
+        <FrameLayout
+            android:id="@+id/imageContainer"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:background="#F8F9FA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <!-- Flash Badge -->
+            <TextView
+                android:id="@+id/tvFlashBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_percentage"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="⚡ FLASH"
+                android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+
+            <!-- Discount Chip -->
+            <TextView
+                android:id="@+id/tvDiscountChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:textColor="#FF3B30"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                tools:text="-45%" />
+        </FrameLayout>
+
+        <!-- Product Title -->
+        <TextView
+            android:id="@+id/tvProductTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#1A1A1A"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageContainer"
+            tools:text="Wireless Noise Cancelling Headphones" />
+
+        <!-- Price Section -->
+        <LinearLayout
+            android:id="@+id/priceLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProductTitle">
+
+            <TextView
+                android:id="@+id/tvDealPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#047857"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="$49.99" />
+
+            <TextView
+                android:id="@+id/tvOriginalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textColor="#8E8E93"
+                android:textSize="8sp"
+                tools:text="$89.99" />
+        </LinearLayout>
+
+        <!-- Stock Progress Bar -->
+        <ProgressBar
+            android:id="@+id/pbStockProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:visibility="visible"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:max="100"
+            android:progressDrawable="@drawable/custom_progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceLayout"
+            tools:progress="75" />
+
+        <!-- Stock Status Text -->
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvStockStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pbStockProgress"
+            tools:text="Sold: 75% | 12 left" />
+
+        <!-- Buy / Add Button -->
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnBuyNow"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:insetTop="0dp"
+            android:background="@drawable/orange_button_bg"
+            android:insetBottom="0dp"
+            android:text="Add to Cart"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStockStatus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
